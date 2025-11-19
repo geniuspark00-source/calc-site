@@ -74,7 +74,15 @@ export default function LeaseToMonthly() {
   );
 }
 
-function Input({ label, value, setValue }) {
+function Input({
+  label,
+  value,
+  setValue,
+}: {
+  label: string;
+  value: number;
+  setValue: (v: number) => void;
+}) {
   return (
     <div>
       <label className="text-sm font-bold">{label}</label>
