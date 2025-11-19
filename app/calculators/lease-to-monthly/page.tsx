@@ -7,15 +7,13 @@ export default function LeaseToMonthly() {
   const [loan, setLoan] = useState(0);
   const [rate, setRate] = useState(0);
   const [manage, setManage] = useState(0);
-  const [expectedReturn, setExpectedReturn] = useState(3); // 전세금 운용 수익률(연%)
+  const [expectedReturn, setExpectedReturn] = useState(3);
 
-  // 월세 전환 시 순수익 계산
   const calcMonthlyIncome = () => {
     const loanInterest = loan * (rate / 100) / 12;
     return expectedMonthly - manage - loanInterest;
   };
 
-  // 전세 유지 시 기대 수익 (전세금 운용 수익)
   const calcJeonseIncome = () => {
     return (jeonse * (expectedReturn / 100)) / 12;
   };
@@ -36,7 +34,6 @@ export default function LeaseToMonthly() {
       </p>
 
       <div className="bg-white p-4 shadow-sm rounded-lg space-y-4 border">
-
         <Input label="전세금" value={jeonse} setValue={setJeonse} />
         <Input label="예상 월세" value={expectedMonthly} setValue={setExpectedMonthly} />
         <Input label="대출금" value={loan} setValue={setLoan} />
@@ -47,26 +44,28 @@ export default function LeaseToMonthly() {
           value={expectedReturn}
           setValue={setExpectedReturn}
         />
-
       </div>
 
       <div className="mt-6 bg-blue-50 p-4 rounded-lg border border-blue-200">
         <p className="font-bold text-lg text-blue-700">📌 계산 결과</p>
 
-        <p>월세 전환 월 순수익:  
+        <p>
+          월세 전환 월 순수익:
           <strong> {Math.round(monthlyIncome).toLocaleString()} 원</strong>
         </p>
 
-        <p>전세 유지 월 기대수익: 
+        <p>
+          전세 유지 월 기대수익:
           <strong> {Math.round(jeonseIncome).toLocaleString()} 원</strong>
         </p>
 
         <p className="mt-2">
-          월세 전환이  
+          월세 전환이{" "}
           <strong className={diff >= 0 ? "text-green-700" : "text-red-700"}>
-            {diff >= 0 ? ` +${Math.round(diff).toLocaleString()}원` : 
-              ` ${Math.round(diff).toLocaleString()}원`}
-          </strong>
+            {diff >= 0
+              ? ` +${Math.round(diff).toLocaleString()}원`
+              : ` ${Math.round(diff).toLocaleString()}원`}
+          </strong>{" "}
           더 유리합니다.
         </p>
       </div>
@@ -95,12 +94,3 @@ function Input({
     </div>
   );
 }
-<a
-  href="/calculators/lease-to-monthly"
-  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
->
-  <h2 className="text-lg font-bold text-blue-600">전세 → 월세 전환 계산기 →</h2>
-  <p className="text-gray-600 text-sm">
-    전세 유지 대비 월세 전환 시 수익 비교 계산기.
-  </p>
-</a>
