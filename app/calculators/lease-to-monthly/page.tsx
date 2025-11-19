@@ -24,6 +24,11 @@ export default function LeaseToMonthly() {
 
   return (
     <div>
+      {/* 🔥 네비게이션 추가 */}
+      <a href="/" className="text-blue-600 underline mb-4 inline-block">
+        ← 계산기 목록으로 돌아가기
+      </a>
+
       <h1 className="text-2xl font-bold mb-4 text-blue-700">
         전세 → 월세 전환 수익 계산기
       </h1>
