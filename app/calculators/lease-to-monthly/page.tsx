@@ -1,9 +1,3 @@
-export const metadata = {
-  title: "전세 → 월세 전환 계산기 | Calc Site",
-  description: "전세를 월세로 바꿨을 때 순수익과 전세 유지 대비 수익 차이를 쉽게 계산해줍니다.",
-  keywords: ["전세 월세 전환", "월세 전환 계산기", "전세 계산기", "월세 계산기"],
-};
-
 
 "use client";
 import { useState } from "react";
