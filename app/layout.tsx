@@ -1,3 +1,26 @@
+export const metadata = {
+  title: "실생활 계산기 모음 | Calc Site",
+  description: "전세 → 월세 전환 계산기, 임대 수익률 계산기 등 다양한 실생활 계산기를 제공합니다.",
+  keywords: ["계산기", "전세 계산기", "월세 계산기", "임대 수익률", "부동산 계산기", "월세전환"],
+  openGraph: {
+    title: "실생활 계산기 모음 | Calc Site",
+    description:
+      "전세 → 월세 전환 계산기, 임대 수익률 계산기 등 다양한 실생활 계산기를 제공합니다.",
+    url: "https://calc-site-delta.vercel.app",
+    siteName: "Calc Site",
+    images: [
+      {
+        url: "https://dummyimage.com/1200x630/0a4cff/ffffff&text=Calc+Site",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "ko_KR",
+    type: "website",
+  },
+};
+
+
 import './globals.css'
 
 export const metadata = {
