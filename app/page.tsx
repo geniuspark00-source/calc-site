@@ -81,6 +81,19 @@ export default function Home() {
   </p>
 </a>
 
+{/* 원가 → 판매가 / 마진율 계산기 */}
+<a
+  href="/calculators/margin"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-amber-700">
+    마진율 / 판매가 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    원가와 목표 마진율로 판매가를 계산하거나, 실제 판매가 기준 마진율을 분석합니다.
+  </p>
+</a>
+
       </div>
     </div>
   );
