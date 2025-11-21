@@ -1,34 +1,26 @@
-// lib/seo.ts
-type SeoProps = {
+// /lib/seo.ts
+
+export interface SeoProps {
   title: string;
   description: string;
-  url: string;
-  image?: string;
-};
+  url?: string; // optional 로 변경하여 유연하게 처리
+}
 
-export function generateSEOTags({
-  title,
-  description,
-  url,
-  image = "https://dummyimage.com/1200x630/0a4cff/ffffff&text=Calc+Site",
-}: SeoProps) {
+export function generateSEOTags({ title, description, url }: SeoProps) {
   return {
     title,
     description,
+    metadataBase: url ? new URL(url) : undefined,
     openGraph: {
       title,
       description,
       url,
       type: "website",
-      locale: "ko_KR",
-      siteName: "Calc Site",
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-        },
-      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
   };
 }

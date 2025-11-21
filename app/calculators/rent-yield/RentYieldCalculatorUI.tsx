@@ -12,14 +12,16 @@ export default function RentYieldCalculatorUI() {
   const [rate, setRate] = useState(0);
   const [manage, setManage] = useState(0);
 
-  const monthlyLoanInterest = (loan * (rate / 100)) / 12;
+  // 계산 파트
+  const monthlyLoanInterest = loan > 0 ? (loan * (rate / 100)) / 12 : 0;
   const annualIncome = (monthly - manage - monthlyLoanInterest) * 12;
   const netInvestment = price - deposit - loan;
+
   const yieldPercent =
     netInvestment > 0 ? (annualIncome / netInvestment) * 100 : 0;
 
   return (
-    <div>
+    <div className="max-w-xl mx-auto p-4">
       <a href="/" className="text-blue-600 underline mb-4 inline-block">
         ← 계산기 목록으로 돌아가기
       </a>
@@ -28,10 +30,11 @@ export default function RentYieldCalculatorUI() {
         임대 수익률 계산기
       </h1>
 
-      <p className="text-gray-600 mb-6">
+      <p className="text-gray-600 mb-6 leading-relaxed">
         매입가, 보증금, 월세, 대출이자 등을 입력하면 자동으로 임대 수익률이 계산됩니다.
       </p>
 
+      {/* 입력박스 */}
       <div className="bg-white p-4 rounded-lg border shadow-sm space-y-4">
         <Input label="매입가" value={price} onChange={setPrice} />
         <Input label="보증금" value={deposit} onChange={setDeposit} />
@@ -41,10 +44,13 @@ export default function RentYieldCalculatorUI() {
         <Input label="관리비/기타 비용" value={manage} onChange={setManage} />
       </div>
 
+      {/* 결과 */}
       <ResultBox title="📌 계산 결과">
         <p>
           월 대출이자:{" "}
-          <strong>{Math.round(monthlyLoanInterest).toLocaleString()} 원</strong>
+          <strong>
+            {Math.round(monthlyLoanInterest).toLocaleString()} 원
+          </strong>
         </p>
 
         <p>
@@ -54,7 +60,9 @@ export default function RentYieldCalculatorUI() {
 
         <p>
           임대 수익률:{" "}
-          <strong className="text-green-700">{yieldPercent.toFixed(2)}%</strong>
+          <strong className="text-green-700">
+            {yieldPercent.toFixed(2)}%
+          </strong>
         </p>
       </ResultBox>
     </div>
