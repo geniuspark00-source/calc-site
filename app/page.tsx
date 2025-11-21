@@ -59,6 +59,17 @@ export default function Home() {
           </p>
         </a>
 
+{/* 대출 상환 계산기 */}
+<a
+  href="/calculators/loan"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-orange-700">대출 상환 계산기 →</h2>
+  <p className="text-gray-600 text-sm">
+    원리금균등 · 원금균등 · 만기일시 방식 월 상환금과 총 이자를 자동 계산합니다.
+  </p>
+</a>
+
       </div>
     </div>
   );
