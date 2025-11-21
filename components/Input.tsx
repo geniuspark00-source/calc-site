@@ -30,16 +30,16 @@ export default function Input({ label, value, onChange, placeholder }: InputProp
     // 숫자만 남기기
     const raw = normalizeNumber(inputValue);
 
-    // 상태 업데이트
+    // 상태 업데이트 (콤마 포함 표시)
     setDisplay(formatNumber(raw));
 
-    // 부모(계산기)에 숫자 전달
+    // 부모로 숫자 전달
     const numericValue = raw === "" ? 0 : Number(raw);
     onChange(numericValue);
   };
 
   const handleFocus = () => {
-    // 포커스 시 0은 제거
+    // 포커스 시 0 제거
     if (display === "0") {
       setDisplay("");
     }
@@ -47,10 +47,16 @@ export default function Input({ label, value, onChange, placeholder }: InputProp
 
   return (
     <div className="space-y-1">
-      <label className="text-sm font-bold">{label}</label>
+      <label className="text-sm font-bold text-gray-900">{label}</label>
+
       <input
         type="text"
-        className="w-full border rounded p-2 mt-1"
+        className="
+          w-full border rounded p-2 mt-1
+          text-gray-900
+          placeholder-gray-400
+          !opacity-100
+        "
         value={display}
         placeholder={placeholder}
         onChange={handleChange}
