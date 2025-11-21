@@ -38,7 +38,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+      {/* 🔥 min-h-screen 삭제 + overflow-auto 추가 */}
+      <body className="bg-gray-50 text-gray-900 flex flex-col overflow-y-auto">
+
         {/* 헤더 */}
         <header className="w-full bg-blue-600 text-white shadow-md">
           <div className="max-w-3xl mx-auto px-4 py-4 text-lg font-bold">
@@ -55,6 +57,7 @@ export default function RootLayout({
         <footer className="w-full bg-white border-t py-6 text-center text-sm text-gray-500">
           © 2025 계산기 포털. All rights reserved.
         </footer>
+
       </body>
     </html>
   );
