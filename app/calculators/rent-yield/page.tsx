@@ -1,5 +1,5 @@
 import { generateSEOTags } from "@/lib/seo";
-import RentYieldClient from "./RentYieldClient";
+import RentYieldCalculatorUI from "./RentYieldCalculatorUI";
 
 export const metadata = generateSEOTags({
   title: "임대 수익률 계산기 | Calc Site",
@@ -9,5 +9,5 @@ export const metadata = generateSEOTags({
 });
 
 export default function Page() {
-  return <RentYieldClient />;
+  return <RentYieldCalculatorUI />;
 }
