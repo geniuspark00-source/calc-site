@@ -41,18 +41,33 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-
-      {/* 🔥 네이버 웹마스터 태그 (정확한 값) */}
       <head>
+        {/* 🔥 네이버 웹마스터 인증 */}
         <meta
           name="naver-site-verification"
           content="4a30cccf3155a14557a50753283804df1e4a5524"
+        />
+
+        {/* 🔥 네이버 애널리틱스 */}
+        <script
+          type="text/javascript"
+          src="//wcs.pstatic.net/wcslog.js"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (!wcs_add) var wcs_add = {};
+              wcs_add["wa"] = "16e52379c8f2ae0";
+              if (window.wcs) {
+                wcs_do();
+              }
+            `,
+          }}
         />
       </head>
 
       {/* 🔥 scroll 문제 해결된 body */}
       <body className="bg-gray-50 text-gray-900 flex flex-col overflow-y-auto">
-
         {/* 헤더 */}
         <header className="w-full bg-blue-600 text-white shadow-md">
           <div className="max-w-3xl mx-auto px-4 py-4 text-lg font-bold">
@@ -69,7 +84,6 @@ export default function RootLayout({
         <footer className="w-full bg-white border-t py-6 text-center text-sm text-gray-500">
           © 2025 계산기 포털. All rights reserved.
         </footer>
-
       </body>
     </html>
   );
