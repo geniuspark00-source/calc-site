@@ -70,6 +70,17 @@ export default function Home() {
   </p>
 </a>
 
+{/* 연봉 실수령액 계산기 */}
+<a
+  href="/calculators/salary"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-red-700">연봉 → 실수령액 계산기 →</h2>
+  <p className="text-gray-600 text-sm">
+    연봉에서 실제 월 실수령액을 자동 계산합니다. (4대보험·세금 포함)
+  </p>
+</a>
+
       </div>
     </div>
   );
