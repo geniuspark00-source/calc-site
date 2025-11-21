@@ -31,6 +31,42 @@ export const metadata = {
 
 import "./globals.css";
 
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ko">
+      {/* 🔥 네이버 웹마스터 태그 추가 */}
+      <head>
+        <meta
+          name="naver-site-verification"
+          content="4a30cccf3155a14557a5075323804df1e4a5524"
+        />
+      </head>
+
+      {/* 🔥 스크롤 문제 해결 버전 */}
+      <body className="bg-gray-50 text-gray-900 flex flex-col overflow-y-auto">
+        {/* 헤더 */}
+        <header className="w-full bg-blue-600 text-white shadow-md">
+          <div className="max-w-3xl mx-auto px-4 py-4 text-lg font-bold">
+            계산기 포털
+          </div>
+        </header>
+
+        {/* 메인 콘텐츠 */}
+        <main className="flex-1 max-w-3xl mx-auto w-full px-4 py-6">
+          {children}
+        </main>
+
+        {/* 푸터 */}
+        <footer className="w-full bg-white border-t py-6 text-center text-sm text-gray-500">
+          © 2025 계산기 포털. All rights reserved.
+        </footer>
+      </body>
+    </html>
+  );
+}
+
+import "./globals.css";
+
 export default function RootLayout({
   children,
 }: {
