@@ -3,7 +3,7 @@
 export interface SeoProps {
   title: string;
   description: string;
-  url?: string; // optional 로 변경하여 유연하게 처리
+  url?: string; // optional로 처리하여 유연 적용
 }
 
 export function generateSEOTags({ title, description, url }: SeoProps) {
