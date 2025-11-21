@@ -2,32 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --- 전역 글자 선명도 개선 --- */
+/* ===== 전역 텍스트 선명도 개선 ===== */
 html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   color: #111827; /* gray-900 */
+  font-size: 16px;
 }
 
-/* --- 제목 공통 스타일 --- */
+/* ===== 기본 텍스트 스타일 ===== */
 h1, h2, h3, h4, h5, h6 {
   @apply font-semibold text-gray-900;
 }
 
-/* --- 본문 및 라벨 공통 스타일 --- */
 p, label, strong, span {
   @apply text-gray-900;
 }
 
-/* --- 모바일 입력 필드 글자 선명도 개선 --- */
+/* ===== 입력 필드 텍스트 선명도 + 글자 크기 ===== */
 input {
   -webkit-font-smoothing: antialiased;
-  font-size: 16px; /* 모바일 확대 방지 */
+  font-size: 16px; /* 모바일 줌 방지 */
 }
 
-/* --- 링크 색상 기본화 --- */
+/* ===== 링크 색상 통일 ===== */
 a {
   @apply text-blue-600;
 }
-
