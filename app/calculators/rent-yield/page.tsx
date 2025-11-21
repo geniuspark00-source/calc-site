@@ -1,3 +1,4 @@
+"use client";
 import { generateSEOTags } from "@/lib/seo";
 
 export const metadata = generateSEOTags({
@@ -7,7 +8,6 @@ export const metadata = generateSEOTags({
   url: "https://calc-site-delta.vercel.app/calculators/rent-yield",
 });
 
-"use client";
 import { useState } from "react";
 import Input from "@/components/Input";
 import ResultBox from "@/components/ResultBox";
