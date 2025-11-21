@@ -1,39 +1,42 @@
 "use client";
 
+import ResultBox from "@/components/ResultBox";
+
 type Props = {
   title: string;
-  description: string;
-  children: React.ReactNode; // 입력 영역
-  result?: React.ReactNode; // 결과 영역 (옵션)
+  desc: string;
+  children: React.ReactNode;  // 입력 영역
+  result?: React.ReactNode;    // 결과 영역 (옵션)
 };
 
-export default function CalculatorLayout({
-  title,
-  description,
-  children,
-  result,
-}: Props) {
+export default function CalculatorLayout({ title, desc, children, result }: Props) {
   return (
-    <div>
-      {/* 돌아가기 링크 */}
-      <a href="/" className="text-blue-600 underline mb-4 inline-block">
+    <div className="text-gray-900">
+      {/* 뒤로가기 링크 */}
+      <a href="/" className="text-blue-600 underline mb-4 inline-block font-semibold">
         ← 계산기 목록으로 돌아가기
       </a>
 
-      {/* 제목 */}
-      <h1 className="text-2xl font-bold mb-4 text-blue-700">{title}</h1>
+      {/* 페이지 제목 */}
+      <h1 className="text-2xl font-extrabold mb-3 text-blue-700 tracking-tight">
+        {title}
+      </h1>
 
-      {/* 설명 */}
-      <p className="text-gray-600 mb-6">{description}</p>
+      {/* 설명 글 */}
+      <p className="text-gray-700 mb-6 leading-relaxed">
+        {desc}
+      </p>
 
-      {/* 입력 박스 */}
+      {/* 입력부 */}
       <div className="bg-white p-4 rounded-lg shadow-sm border space-y-4">
         {children}
       </div>
 
-      {/* 결과 박스 */}
+      {/* 결과부 (옵션) */}
       {result && (
-        <div className="mt-6 bg-blue-50 p-4 rounded-lg border">{result}</div>
+        <ResultBox title="📌 계산 결과">
+          {result}
+        </ResultBox>
       )}
     </div>
   );
