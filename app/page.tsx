@@ -94,6 +94,19 @@ export default function Home() {
   </p>
 </a>
 
+{/* 유튜브 수익 계산기 */}
+<a
+  href="/calculators/youtube"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-red-700">
+    유튜브 조회수 → 수익 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    한국 기준 CPM·광고시청률을 반영하여 조회수로 수익을 자동 계산합니다.
+  </p>
+</a>
+
       </div>
     </div>
   );
