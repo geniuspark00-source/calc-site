@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Input from "@/components/Input";
 
 export default function RentYieldCalculator() {
   const [price, setPrice] = useState(0);
@@ -30,12 +31,16 @@ export default function RentYieldCalculator() {
       </p>
 
       <div className="bg-white p-4 rounded-lg border shadow-sm space-y-4">
-        <Input label="매입가" value={price} setValue={setPrice} />
-        <Input label="보증금" value={deposit} setValue={setDeposit} />
-        <Input label="월세" value={monthly} setValue={setMonthly} />
-        <Input label="대출금" value={loan} setValue={setLoan} />
-        <Input label="이자율(%)" value={rate} setValue={setRate} />
-        <Input label="관리비/기타 비용" value={manage} setValue={setManage} />
+        <Input label="매입가" value={price} onChange={setPrice} />
+        <Input label="보증금" value={deposit} onChange={setDeposit} />
+        <Input label="월세" value={monthly} onChange={setMonthly} />
+        <Input label="대출금" value={loan} onChange={setLoan} />
+        <Input label="이자율(%)" value={rate} onChange={setRate} />
+        <Input
+          label="관리비/기타 비용"
+          value={manage}
+          onChange={setManage}
+        />
       </div>
 
       <div className="mt-6 bg-blue-50 p-4 rounded-lg border">
@@ -57,28 +62,6 @@ export default function RentYieldCalculator() {
           </strong>
         </p>
       </div>
-    </div>
-  );
-}
-
-function Input({
-  label,
-  value,
-  setValue,
-}: {
-  label: string;
-  value: number;
-  setValue: (n: number) => void;
-}) {
-  return (
-    <div>
-      <label className="text-sm font-bold">{label}</label>
-      <input
-        type="number"
-        className="w-full border rounded p-2 mt-1"
-        value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
-      />
     </div>
   );
 }

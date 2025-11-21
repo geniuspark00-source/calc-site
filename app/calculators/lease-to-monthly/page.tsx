@@ -1,6 +1,6 @@
-
 "use client";
 import { useState } from "react";
+import Input from "@/components/Input";
 
 export default function LeaseToMonthly() {
   const [jeonse, setJeonse] = useState(0);
@@ -11,7 +11,7 @@ export default function LeaseToMonthly() {
   const [expectedReturn, setExpectedReturn] = useState(3);
 
   const calcMonthlyIncome = () => {
-    const loanInterest = loan * (rate / 100) / 12;
+    const loanInterest = (loan * (rate / 100)) / 12;
     return expectedMonthly - manage - loanInterest;
   };
 
@@ -25,7 +25,6 @@ export default function LeaseToMonthly() {
 
   return (
     <div>
-      {/* 🔥 네비게이션 추가 */}
       <a href="/" className="text-blue-600 underline mb-4 inline-block">
         ← 계산기 목록으로 돌아가기
       </a>
@@ -35,20 +34,20 @@ export default function LeaseToMonthly() {
       </h1>
 
       <p className="text-gray-600 mb-6">
-        전세를 월세로 전환했을 때의 월순수익과 기존 전세금을 유지했을 때의
+        전세를 월세로 전환했을 때의 월 순수익과 기존 전세금을 유지했을 때의
         수익을 비교합니다.
       </p>
 
       <div className="bg-white p-4 shadow-sm rounded-lg space-y-4 border">
-        <Input label="전세금" value={jeonse} setValue={setJeonse} />
-        <Input label="예상 월세" value={expectedMonthly} setValue={setExpectedMonthly} />
-        <Input label="대출금" value={loan} setValue={setLoan} />
-        <Input label="이자율(%)" value={rate} setValue={setRate} />
-        <Input label="관리비" value={manage} setValue={setManage} />
+        <Input label="전세금" value={jeonse} onChange={setJeonse} />
+        <Input label="예상 월세" value={expectedMonthly} onChange={setExpectedMonthly} />
+        <Input label="대출금" value={loan} onChange={setLoan} />
+        <Input label="이자율(%)" value={rate} onChange={setRate} />
+        <Input label="관리비" value={manage} onChange={setManage} />
         <Input
           label="전세금 운용 수익률(연 %)"
           value={expectedReturn}
-          setValue={setExpectedReturn}
+          onChange={setExpectedReturn}
         />
       </div>
 
@@ -75,28 +74,6 @@ export default function LeaseToMonthly() {
           더 유리합니다.
         </p>
       </div>
-    </div>
-  );
-}
-
-function Input({
-  label,
-  value,
-  setValue,
-}: {
-  label: string;
-  value: number;
-  setValue: (v: number) => void;
-}) {
-  return (
-    <div>
-      <label className="text-sm font-bold">{label}</label>
-      <input
-        type="number"
-        className="w-full border rounded p-2 mt-1"
-        value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
-      />
     </div>
   );
 }
