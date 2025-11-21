@@ -3,12 +3,13 @@
 import { useState } from "react";
 import Input from "@/components/Input";
 import ResultBox from "@/components/ResultBox";
+import RelatedCalculators from "@/components/RelatedCalculators";
 
 export default function LoanCalculatorUI() {
-  const [principal, setPrincipal] = useState(0); // 대출금액
-  const [rate, setRate] = useState(4); // 연이율(%)
-  const [years, setYears] = useState(20); // 기간(년)
-  const [type, setType] = useState("원리금균등"); // 방식 선택
+  const [principal, setPrincipal] = useState(0);
+  const [rate, setRate] = useState(4);
+  const [years, setYears] = useState(20);
+  const [type, setType] = useState("원리금균등");
 
   const months = years * 12;
   const monthlyRate = rate / 100 / 12;
@@ -17,7 +18,6 @@ export default function LoanCalculatorUI() {
   let totalInterest = 0;
   let totalPay = 0;
 
-  // 원리금균등
   if (type === "원리금균등") {
     if (monthlyRate === 0) {
       monthlyPay = principal / months;
@@ -30,7 +30,6 @@ export default function LoanCalculatorUI() {
     totalInterest = totalPay - principal;
   }
 
-  // 원금균등
   if (type === "원금균등") {
     const monthlyPrincipal = principal / months;
     let interestSum = 0;
@@ -42,12 +41,11 @@ export default function LoanCalculatorUI() {
 
     totalInterest = interestSum;
     totalPay = principal + totalInterest;
-    monthlyPay = monthlyPrincipal + principal * monthlyRate; // 첫 달 기준
+    monthlyPay = monthlyPrincipal + principal * monthlyRate;
   }
 
-  // 만기일시
   if (type === "만기일시") {
-    monthlyPay = principal * monthlyRate; // 매달 이자만 납부
+    monthlyPay = principal * monthlyRate;
     totalInterest = monthlyPay * months;
     totalPay = principal + totalInterest;
   }
@@ -63,7 +61,7 @@ export default function LoanCalculatorUI() {
       </h1>
 
       <p className="text-gray-600 mb-6">
-        원리금균등, 원금균등, 만기일시 상환 방식 중 선택하여 월 상환금과 총이자, 총상환액을 계산합니다.
+        원리금균등, 원금균등, 만기일시 상환 방식 중 선택하여 월 상환금과 총이자를 계산합니다.
       </p>
 
       <div className="bg-white p-4 rounded-lg border shadow-sm space-y-4 mb-6">
@@ -71,7 +69,6 @@ export default function LoanCalculatorUI() {
         <Input label="연이율(%)" value={rate} onChange={setRate} />
         <Input label="기간(년)" value={years} onChange={setYears} />
 
-        {/* 선택 박스 */}
         <label className="block text-sm font-medium text-gray-700">
           상환 방식
         </label>
@@ -98,12 +95,23 @@ export default function LoanCalculatorUI() {
           </strong>
         </p>
         <p>
-          총 상환액(원금+이자):{" "}
+          총 상환액:{" "}
           <strong className="text-blue-700">
             {Math.round(totalPay).toLocaleString()} 원
           </strong>
         </p>
       </ResultBox>
+
+      {/* 내부링크 자동 */}
+      <RelatedCalculators
+        items={[
+          { title: "임대 수익률 계산기", url: "/calculators/rent-yield" },
+          { title: "연봉 실수령액 계산기", url: "/calculators/salary" },
+          { title: "유튜브 수익 계산기", url: "/calculators/youtube" },
+          { title: "마진 계산기", url: "/calculators/margin" },
+        ]}
+      />
+
     </div>
   );
 }
