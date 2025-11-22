@@ -2,94 +2,77 @@
 
 import { useState } from "react";
 import Input from "@/components/Input";
+import ResultBox from "@/components/ResultBox";
 
 export default function GasHeatingCalculatorUI() {
-  const regions = {
-    서울: { unitPrice: 89, baseFee: 1450 },
-    경기: { unitPrice: 85, baseFee: 1600 },
-    인천: { unitPrice: 95, baseFee: 1550 },
-    부산: { unitPrice: 87, baseFee: 1450 },
-    대구: { unitPrice: 88, baseFee: 1500 },
-    광주: { unitPrice: 86, baseFee: 1550 },
-    대전: { unitPrice: 90, baseFee: 1500 },
-    울산: { unitPrice: 88, baseFee: 1450 },
-    강원: { unitPrice: 92, baseFee: 1600 },
-    제주: { unitPrice: 97, baseFee: 1700 },
-  };
+  const [unit, setUnit] = useState("kwh"); // kwh | m3
+  const [usage, setUsage] = useState(0); // 입력값 (단위에 따라 의미 다름)
 
-  const [region, setRegion] = useState<keyof typeof regions>("서울");
-  const [kwh, setKwh] = useState(500);
-  const [unitPrice, setUnitPrice] = useState(regions["서울"].unitPrice);
-  const [baseFee, setBaseFee] = useState(regions["서울"].baseFee);
-  const [includeVAT, setIncludeVAT] = useState(true);
+  // m3 → kWh 변환
+  const M3_TO_KWH = 11.6;
 
-  // 🔥 지역 변경 시 자동 적용 (TS 오류 해결 버전)
-  const changeRegion = (value: string) => {
-    const key = value as keyof typeof regions;
-    setRegion(key);
-    setUnitPrice(regions[key].unitPrice);
-    setBaseFee(regions[key].baseFee);
-  };
+  // 실제 계산용 kWh
+  const usageKwh = unit === "kwh" ? usage : usage * M3_TO_KWH;
 
-  // kWh → ㎥ 변환
-  const m3 = kwh / 11.2;
+  // === 요금 계산 ===
+  const basicFee = 1140; // 기본요금
+  const rate = 15.24; // kWh당 도시가스 단가 (예시)
 
-  const usageCost = kwh * unitPrice;
-  const subtotal = usageCost + baseFee;
-  const vat = includeVAT ? subtotal * 0.1 : 0;
-  const total = subtotal + vat;
-
-  const format = (n: number) =>
-    n.toLocaleString("ko-KR", { maximumFractionDigits: 0 });
+  const totalCost = basicFee + usageKwh * rate;
 
   return (
-    <div className="max-w-xl mx-auto p-4">
-      <a href="/" className="text-blue-600 underline mb-4 inline-block">
+    <div className="space-y-6 max-w-xl mx-auto">
+
+      <a href="/" className="text-blue-600 underline inline-block mb-3">
         ← 계산기 목록으로 돌아가기
       </a>
 
-      <div className="bg-white p-4 rounded-lg border shadow-sm space-y-4 mb-6">
-        
-        <div>
-          <label className="text-sm font-bold">지역 선택</label>
-          <select
-            value={region}
-            onChange={(e) => changeRegion(e.target.value)}
-            className="w-full border rounded p-2 mt-1"
-          >
-            {Object.keys(regions).map((r) => (
-              <option key={r}>{r}</option>
-            ))}
-          </select>
-        </div>
+      <h1 className="text-2xl font-bold text-orange-600">
+        도시가스 난방비 계산기 (업그레이드)
+      </h1>
 
-        <Input label="월 사용량 (kWh)" value={kwh} onChange={setKwh} />
-        <Input label="단가 (원/kWh)" value={unitPrice} onChange={setUnitPrice} />
-        <Input label="기본요금 (원)" value={baseFee} onChange={setBaseFee} />
+      <p className="text-gray-600 mb-6">
+        월 사용량을 kWh 또는 ㎥(세제곱미터)로 입력해 실제 난방비를 계산합니다.
+      </p>
 
-        <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            checked={includeVAT}
-            onChange={(e) => setIncludeVAT(e.target.checked)}
-          />
-          <label className="text-sm">부가세 10% 포함</label>
-        </div>
+      {/* 단위 선택 */}
+      <div className="space-y-2">
+        <label className="text-sm font-medium">입력 단위 선택</label>
+
+        <select
+          className="w-full border p-2 rounded"
+          value={unit}
+          onChange={(e) => setUnit(e.target.value)}
+        >
+          <option value="kwh">kWh로 입력</option>
+          <option value="m3">㎥(세제곱미터)로 입력</option>
+        </select>
+
+        <Input
+          label={unit === "kwh" ? "월 사용량 (kWh)" : "월 사용량 (㎥)"}
+          value={usage}
+          onChange={setUsage}
+        />
       </div>
 
-      <div className="bg-white p-4 rounded-lg border shadow-sm space-y-3">
-        <h2 className="text-lg font-bold text-blue-700">난방비 계산 결과</h2>
-
-        <p>월 사용량: <strong>{format(kwh)} kWh</strong></p>
-        <p>환산 사용량: <strong>{m3.toFixed(1)} ㎥</strong></p>
-        <p>사용요금: <strong>{format(usageCost)} 원</strong></p>
-        <p>기본요금: <strong>{format(baseFee)} 원</strong></p>
-        <p>부가세: <strong>{format(vat)} 원</strong></p>
-
-        <p className="text-xl font-bold text-red-600">
-          총 난방비: {format(total)} 원
-        </p>
-      </div>
+      {/* 결과 */}
+      <ResultBox
+        title="도시가스 요금 계산 결과"
+        results={[
+          {
+            label: "실제 계산용 사용량 (kWh)",
+            value: `${usageKwh.toFixed(1)} kWh`,
+          },
+          {
+            label: "기본요금",
+            value: `${basicFee} 원`,
+          },
+          {
+            label: "총 난방비",
+            value: `${totalCost.toFixed(0)} 원`,
+          },
+        ]}
+      />
     </div>
   );
 }
