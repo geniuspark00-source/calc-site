@@ -211,6 +211,20 @@ export default function Home() {
   </p>
 </a>
 
+{/* 출퇴근 시간·비용 계산기 */}
+<a
+  href="/calculators/commute"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-blue-600">
+    출퇴근 시간·비용 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    거리·속도·유류비 기반 출퇴근 시간과 비용을 하루·월·연 단위로 계산합니다.
+  </p>
+</a>
+
+
       </div>
     </div>
   );
