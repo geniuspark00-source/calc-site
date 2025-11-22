@@ -17,26 +17,24 @@ export default function GasHeatingCalculatorUI() {
     제주: { unitPrice: 97, baseFee: 1700 },
   };
 
-  const [region, setRegion] = useState("서울");
-  const [kwh, setKwh] = useState(500); // 월 사용량 (kWh)
+  const [region, setRegion] = useState<keyof typeof regions>("서울");
+  const [kwh, setKwh] = useState(500);
   const [unitPrice, setUnitPrice] = useState(regions["서울"].unitPrice);
   const [baseFee, setBaseFee] = useState(regions["서울"].baseFee);
   const [includeVAT, setIncludeVAT] = useState(true);
 
-  // 지역 변경 시 자동 단가 & 기본요금 반영
+  // 🔥 지역 변경 시 자동 적용 (TS 오류 해결 버전)
   const changeRegion = (value: string) => {
-    setRegion(value);
-    setUnitPrice(regions[value].unitPrice);
-    setBaseFee(regions[value].baseFee);
+    const key = value as keyof typeof regions;
+    setRegion(key);
+    setUnitPrice(regions[key].unitPrice);
+    setBaseFee(regions[key].baseFee);
   };
 
-  // kWh → ㎥ 변환 (1㎥ = 11.2kWh)
+  // kWh → ㎥ 변환
   const m3 = kwh / 11.2;
 
-  // 사용요금 계산
-  // 단가: 원/kWh 라고 가정
   const usageCost = kwh * unitPrice;
-
   const subtotal = usageCost + baseFee;
   const vat = includeVAT ? subtotal * 0.1 : 0;
   const total = subtotal + vat;
@@ -46,12 +44,10 @@ export default function GasHeatingCalculatorUI() {
 
   return (
     <div className="max-w-xl mx-auto p-4">
-      {/* 돌아가기 */}
       <a href="/" className="text-blue-600 underline mb-4 inline-block">
         ← 계산기 목록으로 돌아가기
       </a>
 
-      {/* 입력 */}
       <div className="bg-white p-4 rounded-lg border shadow-sm space-y-4 mb-6">
         
         <div>
@@ -67,23 +63,9 @@ export default function GasHeatingCalculatorUI() {
           </select>
         </div>
 
-        <Input
-          label="월 사용량 (kWh)"
-          value={kwh}
-          onChange={setKwh}
-        />
-
-        <Input
-          label="단가 (원/kWh)"
-          value={unitPrice}
-          onChange={setUnitPrice}
-        />
-
-        <Input
-          label="기본요금 (원)"
-          value={baseFee}
-          onChange={setBaseFee}
-        />
+        <Input label="월 사용량 (kWh)" value={kwh} onChange={setKwh} />
+        <Input label="단가 (원/kWh)" value={unitPrice} onChange={setUnitPrice} />
+        <Input label="기본요금 (원)" value={baseFee} onChange={setBaseFee} />
 
         <div className="flex items-center gap-2">
           <input
@@ -95,13 +77,11 @@ export default function GasHeatingCalculatorUI() {
         </div>
       </div>
 
-      {/* 결과 */}
       <div className="bg-white p-4 rounded-lg border shadow-sm space-y-3">
         <h2 className="text-lg font-bold text-blue-700">난방비 계산 결과</h2>
 
         <p>월 사용량: <strong>{format(kwh)} kWh</strong></p>
         <p>환산 사용량: <strong>{m3.toFixed(1)} ㎥</strong></p>
-
         <p>사용요금: <strong>{format(usageCost)} 원</strong></p>
         <p>기본요금: <strong>{format(baseFee)} 원</strong></p>
         <p>부가세: <strong>{format(vat)} 원</strong></p>
@@ -110,10 +90,6 @@ export default function GasHeatingCalculatorUI() {
           총 난방비: {format(total)} 원
         </p>
       </div>
-
-      <p className="text-xs text-gray-500 mt-4">
-        ※ 실제 요금은 도시가스사 조정요금에 따라 다를 수 있습니다.
-      </p>
     </div>
   );
 }
