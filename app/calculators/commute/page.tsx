@@ -1,5 +1,5 @@
 import { generateSEOTags } from "@/lib/seo";
-import CalculatorUI from "./CalculatorUI";
+import CommuteCalculatorUI from "./CommuteCalculatorUI";
 
 export const metadata = generateSEOTags({
   title: "출퇴근 시간·비용 계산기 | Calc Site",
@@ -9,5 +9,5 @@ export const metadata = generateSEOTags({
 });
 
 export default function Page() {
-  return <CalculatorUI />;
+  return <CommuteCalculatorUI />;
 }
