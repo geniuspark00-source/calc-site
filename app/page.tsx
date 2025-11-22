@@ -207,7 +207,7 @@ export default function Home() {
     도시가스 난방비 계산기 →
   </h2>
   <p className="text-gray-600 text-sm">
-    사용량(㎥)과 단가, 기본요금으로 도시가스 난방비를 빠르게 계산합니다.
+    지역별 단가와 기본요금을 자동 반영하고 kWh 기반으로 난방비를 계산합니다.
   </p>
 </a>
 
