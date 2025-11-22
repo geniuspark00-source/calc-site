@@ -133,6 +133,32 @@ export default function Home() {
   </p>
 </a>
 
+{/* 전월세 비교 계산기 */}
+<a
+  href="/calculators/rent-compare"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-blue-600">
+    전월세 비교 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    전세 보증금·월세·보증금 차액·이자율을 기준으로 전세와 월세 중 어떤 선택이 더 유리한지 비교합니다.
+  </p>
+</a>
+
+{/* 자동차 유지비 계산기 */}
+<a
+  href="/calculators/car-cost"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-blue-600">
+    자동차 유지비 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    유류비·보험료·자동차세·정비비를 기반으로 월/연간 자동차 유지비를 계산합니다.
+  </p>
+</a>
+
       </div>
     </div>
   );
