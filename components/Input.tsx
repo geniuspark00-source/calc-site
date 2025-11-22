@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type InputProps = {
   label: string;
@@ -10,12 +10,20 @@ type InputProps = {
 };
 
 export default function Input({ label, value, onChange, placeholder }: InputProps) {
-  const [display, setDisplay] = useState(value.toString());
+  const [display, setDisplay] = useState("");
 
-  // 숫자만 남기기 + 콤마 제거
+  // 부모 value 값이 바뀌면 자동으로 display도 새로 formatting
+  useEffect(() => {
+    if (value === 0) {
+      setDisplay("");
+    } else {
+      setDisplay(value.toLocaleString());
+    }
+  }, [value]);
+
+  // 숫자만 남기기
   const normalizeNumber = (str: string) => {
-    const onlyNums = str.replace(/,/g, "").replace(/\D/g, "");
-    return onlyNums;
+    return str.replace(/,/g, "").replace(/\D/g, "");
   };
 
   // 천 단위 콤마 적용
@@ -25,21 +33,20 @@ export default function Input({ label, value, onChange, placeholder }: InputProp
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let inputValue = e.target.value;
+    const inputValue = e.target.value;
 
-    // 숫자만 남기기
+    // 숫자만 추출한 raw number string
     const raw = normalizeNumber(inputValue);
 
-    // 상태 업데이트 (콤마 포함 표시)
+    // 숫자 formatting UI 표시
     setDisplay(formatNumber(raw));
 
-    // 부모로 숫자 전달
+    // 부모에 number 전달
     const numericValue = raw === "" ? 0 : Number(raw);
     onChange(numericValue);
   };
 
   const handleFocus = () => {
-    // 포커스 시 0 제거
     if (display === "0") {
       setDisplay("");
     }
@@ -55,7 +62,6 @@ export default function Input({ label, value, onChange, placeholder }: InputProp
           w-full border rounded p-2 mt-1
           text-gray-900
           placeholder-gray-400
-          !opacity-100
         "
         value={display}
         placeholder={placeholder}
