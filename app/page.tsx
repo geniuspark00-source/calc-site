@@ -218,6 +218,17 @@ export default function Home() {
   </p>
 </a>
 
+{/* 전기차 충전비 계산기 */}
+<a
+  href="/calculators/ev-charging"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-green-700">전기차 충전비 계산기 →</h2>
+  <p className="text-gray-600 text-sm">
+    배터리 용량과 충전 단가로 1회 충전비와 월·연 충전비를 계산합니다.
+  </p>
+</a>
+
         </div>
 
         {/* ===================== */}
