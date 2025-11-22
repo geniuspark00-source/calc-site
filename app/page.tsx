@@ -107,6 +107,13 @@ export default function Home() {
   </p>
 </a>
 
+<Link
+  href="/calculators/aircon-electric"
+  className="p-4 rounded-lg shadow bg-white hover:bg-gray-50 border"
+>
+  에어컨 전기요금 계산기
+</Link>
+
       </div>
     </div>
   );
