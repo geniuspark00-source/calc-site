@@ -172,6 +172,19 @@ export default function Home() {
   </p>
 </a>
 
+{/* 실업급여 수령액 계산기 */}
+<a
+  href="/calculators/unemployment-benefit"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-purple-600">
+    실업급여 수령액 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    평균임금·근속기간·나이를 기반으로 실업급여 예상 지급액과 지급일수를 계산합니다.
+  </p>
+</a>
+
       </div>
     </div>
   );
