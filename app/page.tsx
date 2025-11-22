@@ -159,6 +159,19 @@ export default function Home() {
   </p>
 </a>
 
+{/* 쿠팡 파트너스 수익 계산기 */}
+<a
+  href="/calculators/coupang-partners"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-indigo-600">
+    쿠팡 파트너스 수익 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    월 클릭 수·전환율·평균 결제 금액·수수료율로 쿠팡 파트너스 예상 수익을 계산합니다.
+  </p>
+</a>
+
       </div>
     </div>
   );
