@@ -120,6 +120,18 @@ export default function Home() {
   </p>
 </a>
 
+{/* 에어컨 모드별 전기요금 비교 계산기 */}
+<a
+  href="/calculators/aircon-mode"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-blue-600">
+    에어컨 모드별 전기요금 비교 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    냉방·제습·절전·터보 모드 소비전력 기반 전기요금 비교 계산.
+  </p>
+</a>
 
       </div>
     </div>
