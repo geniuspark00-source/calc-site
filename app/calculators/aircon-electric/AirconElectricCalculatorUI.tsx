@@ -15,38 +15,46 @@ export default function AirconElectricCalculatorUI() {
   const [power, setPower] = useState<number>(AIRCON_PRESET["wall"].power);
   const [hoursPerDay, setHoursPerDay] = useState<number>(8);
   const [days, setDays] = useState<number>(30);
-  const [kwhPrice, setKwhPrice] = useState<number>(140); // kWh 단가(원)
+  const [kwhPrice, setKwhPrice] = useState<number>(140);
 
-  // 에어컨 종류 변경 시 전력 자동 업데이트
   useEffect(() => {
     setPower(AIRCON_PRESET[type].power);
   }, [type]);
 
-  const dailyKwh = (power * hoursPerDay) / 1000; // 하루 사용량
-  const monthlyKwh = dailyKwh * days; // 월 사용량
+  const dailyKwh = (power * hoursPerDay) / 1000;
+  const monthlyKwh = dailyKwh * days;
   const dailyCost = dailyKwh * kwhPrice;
   const monthlyCost = monthlyKwh * kwhPrice;
 
   const formatNumber = (n: number) =>
-    isNaN(n)
-      ? "-"
-      : n.toLocaleString("ko-KR", {
-          maximumFractionDigits: 0,
-        });
+    n.toLocaleString("ko-KR", { maximumFractionDigits: 0 });
 
   const formatNumberFloat = (n: number) =>
-    isNaN(n)
-      ? "-"
-      : n.toLocaleString("ko-KR", {
-          maximumFractionDigits: 1,
-        });
+    n.toLocaleString("ko-KR", { maximumFractionDigits: 1 });
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-xl mx-auto p-4">
 
-      {/* 입력 영역 */}
-      <div className="grid gap-4 bg-white p-4 rounded-lg shadow-sm">
-        
+      {/* 🔙 돌아가기 링크 */}
+      <a href="/" className="text-blue-600 underline mb-4 inline-block">
+        ← 계산기 목록으로 돌아가기
+      </a>
+
+      {/* 제목 */}
+      <h1 className="text-2xl font-bold mb-4 text-blue-700">
+        에어컨 전기요금 계산기
+      </h1>
+
+      {/* 설명 */}
+      <p className="text-gray-600 mb-6 leading-relaxed">
+        벽걸이·스탠드·2in1 에어컨의 평균 소비전력을 기준으로
+        <br />
+        하루 사용시간과 kWh 단가를 입력하면 월 전기요금을 계산합니다.
+      </p>
+
+      {/* 입력 박스 */}
+      <div className="bg-white p-4 rounded-lg border shadow-sm space-y-4 mb-6">
+
         {/* 에어컨 종류 */}
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium">에어컨 종류</label>
@@ -63,95 +71,65 @@ export default function AirconElectricCalculatorUI() {
           </select>
         </div>
 
-        {/* 하루 사용시간 */}
+        {/* 하루 시간 */}
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium">하루 사용시간 (시간)</label>
+          <label className="text-sm font-medium">하루 사용시간(시간)</label>
           <input
             type="number"
             className="border rounded-md px-3 py-2 text-sm"
             value={hoursPerDay || ""}
             onChange={(e) => setHoursPerDay(Number(e.target.value) || 0)}
-            placeholder="예: 8"
           />
         </div>
 
-        {/* 사용 일수 */}
+        {/* 일수 */}
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium">사용 일수 (일)</label>
+          <label className="text-sm font-medium">사용 일수(일)</label>
           <input
             type="number"
             className="border rounded-md px-3 py-2 text-sm"
             value={days || ""}
             onChange={(e) => setDays(Number(e.target.value) || 0)}
-            placeholder="예: 30"
           />
         </div>
 
         {/* kWh 단가 */}
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium">kWh당 전기요금 (원)</label>
+          <label className="text-sm font-medium">kWh당 전기요금(원)</label>
           <input
             type="number"
             className="border rounded-md px-3 py-2 text-sm"
             value={kwhPrice || ""}
             onChange={(e) => setKwhPrice(Number(e.target.value) || 0)}
-            placeholder="예: 140"
           />
-          <p className="text-[11px] text-gray-500">
-            * 한국 평균 가정용 전기요금은 약 130~150원/kWh 수준입니다.
-          </p>
         </div>
       </div>
 
       {/* 결과 영역 */}
-      <div className="grid gap-4 md:grid-cols-3">
-        
-        {/* 하루 전력 사용량 */}
-        <div className="bg-white rounded-lg shadow-sm p-4">
-          <div className="text-xs text-gray-500 mb-1">하루 전력 사용량</div>
-          <div className="text-lg font-bold">
-            {formatNumberFloat(dailyKwh)} kWh
-          </div>
-        </div>
-
-        {/* 월 전력 사용량 */}
-        <div className="bg-white rounded-lg shadow-sm p-4">
-          <div className="text-xs text-gray-500 mb-1">월 전력 사용량</div>
-          <div className="text-lg font-bold">
-            {formatNumberFloat(monthlyKwh)} kWh
-          </div>
-        </div>
-
-        {/* 월 예상 전기요금 */}
-        <div className="bg-white rounded-lg shadow-sm p-4">
-          <div className="text-xs text-gray-500 mb-1">월 예상 전기요금</div>
-          <div className="text-lg font-bold">
-            {formatNumber(Math.round(monthlyCost))} 원
-          </div>
-        </div>
+      <div className="bg-white p-4 rounded-lg border shadow-sm space-y-3 mb-4">
+        <p>
+          일간 사용량:{" "}
+          <strong>{formatNumberFloat(dailyKwh)} kWh</strong>
+        </p>
+        <p>
+          월간 사용량:{" "}
+          <strong>{formatNumberFloat(monthlyKwh)} kWh</strong>
+        </p>
+        <p>
+          하루 예상 전기요금:{" "}
+          <strong>{formatNumber(Math.round(dailyCost))} 원</strong>
+        </p>
+        <p className="text-lg font-bold text-green-700">
+          월 예상 전기요금: {formatNumber(Math.round(monthlyCost))} 원
+        </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        
-        {/* 하루 예상 전기요금 */}
-        <div className="bg-white rounded-lg shadow-sm p-4">
-          <div className="text-xs text-gray-500 mb-1">하루 예상 전기요금</div>
-          <div className="text-lg font-bold">
-            {formatNumber(Math.round(dailyCost))} 원
-          </div>
-        </div>
-
-        {/* 참고사항 */}
-        <div className="bg-white rounded-lg shadow-sm p-4">
-          <div className="text-xs text-gray-500 mb-1">참고 사항</div>
-          <ul className="text-[11px] text-gray-500 list-disc list-inside space-y-1">
-            <li>누진제 반영되지 않은 대략적 요금입니다.</li>
-            <li>실제 전기요금은 계절/세대/기본요금에 따라 다를 수 있습니다.</li>
-            <li>여름철 지속 가동 시 소비전력 상승할 수 있습니다.</li>
-          </ul>
-        </div>
-      </div>
-
+      {/* 참고 */}
+      <p className="text-[12px] text-gray-500 leading-relaxed">
+        ※ 누진제·기본요금은 반영되지 않은 대략 계산입니다.
+        <br />
+        ※ 실제 전기요금은 계절·세대별 요금제에 따라 달라질 수 있습니다.
+      </p>
     </div>
   );
 }
