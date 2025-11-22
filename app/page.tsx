@@ -205,6 +205,19 @@ export default function Home() {
             </p>
           </a>
 
+{/* 건강보험료 계산기 */}
+<a
+  href="/calculators/health-insurance"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-blue-600">
+    건강보험료 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    직장가입자·지역가입자 건강보험료를 자동 계산합니다.
+  </p>
+</a>
+
         </div>
 
         {/* ===================== */}
