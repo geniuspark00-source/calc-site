@@ -268,6 +268,19 @@ export default function Home() {
   </p>
 </a>
 
+{/* 이별 복구 가능성 계산기 */}
+<a
+  href="/calculators/breakup-recovery"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-pink-600">
+    이별 복구 가능성 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    연락 빈도·대화 톤·이별 사유 기반 재회 확률을 분석합니다.
+  </p>
+</a>
+
         </div>
 
         {/* ===================== */}
