@@ -198,6 +198,19 @@ export default function Home() {
   </p>
 </a>
 
+{/* 도시가스 난방비 계산기 */}
+<a
+  href="/calculators/gas-heating"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-orange-600">
+    도시가스 난방비 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    사용량(㎥)과 단가, 기본요금으로 도시가스 난방비를 빠르게 계산합니다.
+  </p>
+</a>
+
       </div>
     </div>
   );
