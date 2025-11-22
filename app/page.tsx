@@ -242,6 +242,19 @@ export default function Home() {
   </p>
 </a>
 
+{/* 로또 실수령액 계산기 */}
+<a
+  href="/calculators/lotto"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-yellow-600">
+    로또 실수령액 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    로또 당첨금에서 세금 제외 후 실제 수령액을 계산합니다.
+  </p>
+</a>
+
         </div>
 
         {/* ===================== */}
