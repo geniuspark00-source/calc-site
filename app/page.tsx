@@ -185,6 +185,19 @@ export default function Home() {
   </p>
 </a>
 
+{/* 환전 수수료 포함 환율 계산기 */}
+<a
+  href="/calculators/exchange-fee"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-indigo-600">
+    환전 수수료 포함 환율 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    은행 환전 수수료(스프레드)를 포함한 실제 환전 금액을 계산합니다.
+  </p>
+</a>
+
       </div>
     </div>
   );
