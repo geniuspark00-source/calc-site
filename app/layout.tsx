@@ -34,11 +34,7 @@ export const metadata = {
 
 import "./globals.css";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
       <head>
@@ -49,25 +45,27 @@ export default function RootLayout({
         />
 
         {/* 🔥 네이버 애널리틱스 */}
-        <script
-          type="text/javascript"
-          src="//wcs.pstatic.net/wcslog.js"
-        ></script>
+        <script async src="//wcs.pstatic.net/wcslog.js"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               if (!wcs_add) var wcs_add = {};
               wcs_add["wa"] = "16e52379c8f2ae0";
-              if (window.wcs) {
-                wcs_do();
-              }
+              if (window.wcs) { wcs_do(); }
             `,
           }}
         />
+
+        {/* 🔥 구글 애드센스 (반드시 head 내부에 위치해야 함) */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8697754621674017"
+          crossOrigin="anonymous"
+        ></script>
       </head>
 
-      {/* 🔥 scroll 문제 해결된 body */}
       <body className="bg-gray-50 text-gray-900 flex flex-col overflow-y-auto">
+
         {/* 헤더 */}
         <header className="w-full bg-blue-600 text-white shadow-md">
           <div className="max-w-3xl mx-auto px-4 py-4 text-lg font-bold">
@@ -84,6 +82,7 @@ export default function RootLayout({
         <footer className="w-full bg-white border-t py-6 text-center text-sm text-gray-500">
           © 2025 계산기 포털. All rights reserved.
         </footer>
+
       </body>
     </html>
   );
