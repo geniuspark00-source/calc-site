@@ -4,7 +4,7 @@ import { useState } from "react";
 import Input from "@/components/Input";
 import ResultBox from "@/components/ResultBox";
 
-export default function CalculatorUI() {
+export default function CommuteCalculatorUI() {
   const [distance, setDistance] = useState(10); // 편도 km
   const [speed, setSpeed] = useState(40); // km/h
   const [fuelCost, setFuelCost] = useState(1800); // 리터당 가격
@@ -31,11 +31,19 @@ export default function CalculatorUI() {
   const altYearly = altDaily * 264;
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-xl font-bold">출퇴근 시간·비용 계산기</h1>
+    <div className="max-w-xl mx-auto p-4 space-y-6">
+      {/* 🔵 메인으로 돌아가기 */}
+      <a href="/" className="text-blue-600 underline mb-2 inline-block">
+        ← 계산기 목록으로 돌아가기
+      </a>
+
+      {/* 제목 */}
+      <h1 className="text-2xl font-bold mb-2 text-blue-700">
+        출퇴근 시간·비용 계산기
+      </h1>
 
       {/* 입력 */}
-      <div className="grid gap-4">
+      <div className="bg-white p-4 rounded-lg border shadow-sm space-y-4">
         <Input label="편도 거리 (km)" value={distance} onChange={setDistance} />
         <Input label="평균 속도 (km/h)" value={speed} onChange={setSpeed} />
         <Input label="유류비 (1L)" value={fuelCost} onChange={setFuelCost} />
@@ -47,9 +55,9 @@ export default function CalculatorUI() {
         />
       </div>
 
-      {/* 결과: 출퇴근 시간 */}
+      {/* 출퇴근 시간 */}
       <ResultBox
-        title="출퇴근 시간"
+        title="⏱ 출퇴근 시간"
         results={[
           {
             label: "하루",
@@ -68,7 +76,7 @@ export default function CalculatorUI() {
 
       {/* 자동차 비용 */}
       <ResultBox
-        title="자동차 출퇴근 비용"
+        title="🚗 자동차 출퇴근 비용"
         results={[
           { label: "하루", value: `${fuelCostDaily.toFixed(0)} 원` },
           { label: "월(22일)", value: `${fuelCostMonthly.toFixed(0)} 원` },
@@ -76,10 +84,10 @@ export default function CalculatorUI() {
         ]}
       />
 
-      {/* 대중교통 비용 (입력했을 때만 표시) */}
+      {/* 대중교통 */}
       {altCost > 0 && (
         <ResultBox
-          title="대중교통 출퇴근 비용"
+          title="🚇 대중교통 출퇴근 비용"
           results={[
             { label: "하루", value: `${altDaily.toFixed(0)} 원` },
             { label: "월(22일)", value: `${altMonthly.toFixed(0)} 원` },
