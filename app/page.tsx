@@ -229,6 +229,19 @@ export default function Home() {
   </p>
 </a>
 
+{/* 자동차 감가상각 계산기 */}
+<a
+  href="/calculators/car-depreciation"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-red-700">
+    자동차 감가상각 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    감가율, 연비, 보험료, 정비비를 반영하여 자동차의 실제 소유비용을 계산합니다.
+  </p>
+</a>
+
         </div>
 
         {/* ===================== */}
