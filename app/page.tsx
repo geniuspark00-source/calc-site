@@ -151,7 +151,7 @@ export default function Home() {
   href="/calculators/car-cost"
   className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
 >
-  <h2 className="text-lg font-bold text-text-green-700">
+  <h2 className="text-lg font-bold text-green-700">
     자동차 유지비 계산기 →
   </h2>
   <p className="text-gray-600 text-sm">
