@@ -255,6 +255,19 @@ export default function Home() {
   </p>
 </a>
 
+{/* 강아지·고양이 사람 나이 계산기 */}
+<a
+  href="/calculators/pet-age"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
+>
+  <h2 className="text-lg font-bold text-pink-600">
+    강아지·고양이 사람 나이 환산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    반려동물의 실제 나이를 사람 나이로 자동 계산합니다.
+  </p>
+</a>
+
         </div>
 
         {/* ===================== */}
