@@ -107,12 +107,19 @@ export default function Home() {
   </p>
 </a>
 
-<Link
+{/* 에어컨 전기요금 계산기 */}
+<a
   href="/calculators/aircon-electric"
-  className="p-4 rounded-lg shadow bg-white hover:bg-gray-50 border"
+  className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
 >
-  에어컨 전기요금 계산기
-</Link>
+  <h2 className="text-lg font-bold text-blue-600">
+    에어컨 전기요금 계산기 →
+  </h2>
+  <p className="text-gray-600 text-sm">
+    소비전력(W)·사용시간·kWh 단가로 월 전기요금을 자동 계산합니다.
+  </p>
+</a>
+
 
       </div>
     </div>
