@@ -56,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
-        {/* 🔥 구글 애드센스 (반드시 head 내부에 위치해야 함) */}
+        {/* 🔥 구글 애드센스 */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8697754621674017"
@@ -64,17 +64,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ></script>
       </head>
 
-      <body className="bg-gray-50 text-gray-900 flex flex-col overflow-y-auto">
+      <body className="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
 
         {/* 헤더 */}
         <header className="w-full bg-blue-600 text-white shadow-md">
-          <div className="max-w-3xl mx-auto px-4 py-4 text-lg font-bold">
+          <div className="w-full max-w-5xl mx-auto px-4 py-4 text-lg font-bold">
             계산기 포털
           </div>
         </header>
 
-        {/* 메인 콘텐츠 */}
-        <main className="flex-1 max-w-3xl mx-auto w-full px-4 py-6">
+        {/* 메인 콘텐츠 - 폭 제한 제거!! */}
+        <main className="flex-1 w-full px-4 py-6">
           {children}
         </main>
 
