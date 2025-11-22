@@ -1,137 +1,113 @@
 "use client";
 
 import { useState } from "react";
+import Input from "@/components/Input";
 
 export default function CarCostCalculatorUI() {
-  // 기본 입력값
-  const [fuelPrice, setFuelPrice] = useState(1650); // 리터당 유가(원)
-  const [fuelEfficiency, setFuelEfficiency] = useState(11); // km/L
-  const [monthlyDistance, setMonthlyDistance] = useState(900); // 월 주행거리
-  const [insuranceYearly, setInsuranceYearly] = useState(850000); // 보험료
-  const [taxYearly, setTaxYearly] = useState(300000); // 자동차세
-  const [maintenanceYearly, setMaintenanceYearly] = useState(400000); // 정비/소모품 비용
+  const [fuelEfficiency, setFuelEfficiency] = useState(12); // km/L
+  const [distancePerMonth, setDistancePerMonth] = useState(1000); // 월 주행거리
+  const [fuelPrice, setFuelPrice] = useState(1650); // 연료 단가
+  const [insurance, setInsurance] = useState(900000); // 연간 보험료
+  const [maintenance, setMaintenance] = useState(300000); // 연간 정비비
+  const [tax, setTax] = useState(250000); // 연간 자동차세
 
-  // 계산
-  const monthlyFuelUsed = monthlyDistance / fuelEfficiency; // L
-  const monthlyFuelCost = monthlyFuelUsed * fuelPrice;
+  // ===== 계산 =====
 
-  const yearlyFuelUsed = monthlyFuelUsed * 12;
+  // 월 연료비
+  const monthlyFuelCost =
+    fuelEfficiency > 0
+      ? Math.round((distancePerMonth / fuelEfficiency) * fuelPrice)
+      : 0;
+
+  // 연료비 × 12
   const yearlyFuelCost = monthlyFuelCost * 12;
 
-  const totalYearly =
-    yearlyFuelCost +
-    insuranceYearly +
-    taxYearly +
-    maintenanceYearly;
-
-  const totalMonthly = totalYearly / 12;
+  // 총 연간 유지비 = 연료비 + 보험 + 정비 + 자동차세
+  const totalYearCost =
+    yearlyFuelCost + insurance + maintenance + tax;
 
   const format = (n: number) =>
     n.toLocaleString("ko-KR", { maximumFractionDigits: 0 });
 
   return (
     <div className="max-w-xl mx-auto p-4">
-
       {/* 돌아가기 */}
       <a href="/" className="text-blue-600 underline mb-4 inline-block">
         ← 계산기 목록으로 돌아가기
       </a>
 
       <p className="text-gray-600 mb-6 leading-relaxed">
-        유류비, 자동차세, 보험료, 정비비 등을 포함하여
-        <br />
-        자동차 한 대를 운영하는 데 드는 전체 비용을 계산합니다.
+        자동차 유지비는 연료비, 보험료, 정비비, 자동차세 등을 포함해
+        계산됩니다.
       </p>
 
-      {/* 입력 영역 */}
-      <div className="bg-white p-4 rounded-lg shadow-sm border space-y-4 mb-6">
+      {/* 입력 */}
+      <div className="bg-white p-4 rounded-lg border shadow-sm space-y-4 mb-6">
+        <Input
+          label="연비 (km/L)"
+          value={fuelEfficiency}
+          onChange={setFuelEfficiency}
+        />
 
-        <div>
-          <label className="text-sm font-medium">ℓ당 유가(원)</label>
-          <input
-            type="number"
-            value={fuelPrice}
-            onChange={(e) => setFuelPrice(Number(e.target.value))}
-            className="w-full border rounded p-2"
-          />
-        </div>
+        <Input
+          label="월 주행거리 (km)"
+          value={distancePerMonth}
+          onChange={setDistancePerMonth}
+        />
 
-        <div>
-          <label className="text-sm font-medium">연비(km/L)</label>
-          <input
-            type="number"
-            value={fuelEfficiency}
-            onChange={(e) => setFuelEfficiency(Number(e.target.value))}
-            className="w-full border rounded p-2"
-          />
-        </div>
+        <Input
+          label="연료 단가 (원/L)"
+          value={fuelPrice}
+          onChange={setFuelPrice}
+        />
 
-        <div>
-          <label className="text-sm font-medium">월 주행거리(km)</label>
-          <input
-            type="number"
-            value={monthlyDistance}
-            onChange={(e) => setMonthlyDistance(Number(e.target.value))}
-            className="w-full border rounded p-2"
-          />
-        </div>
+        <Input
+          label="연간 보험료 (원)"
+          value={insurance}
+          onChange={setInsurance}
+        />
 
-        <div>
-          <label className="text-sm font-medium">연간 보험료(원)</label>
-          <input
-            type="number"
-            value={insuranceYearly}
-            onChange={(e) => setInsuranceYearly(Number(e.target.value))}
-            className="w-full border rounded p-2"
-          />
-        </div>
+        <Input
+          label="연간 정비비 (원)"
+          value={maintenance}
+          onChange={setMaintenance}
+        />
 
-        <div>
-          <label className="text-sm font-medium">연간 자동차세(원)</label>
-          <input
-            type="number"
-            value={taxYearly}
-            onChange={(e) => setTaxYearly(Number(e.target.value))}
-            className="w-full border rounded p-2"
-          />
-        </div>
-
-        <div>
-          <label className="text-sm font-medium">연간 정비/소모품 비용(원)</label>
-          <input
-            type="number"
-            value={maintenanceYearly}
-            onChange={(e) => setMaintenanceYearly(Number(e.target.value))}
-            className="w-full border rounded p-2"
-          />
-        </div>
+        <Input
+          label="연간 자동차세 (원)"
+          value={tax}
+          onChange={setTax}
+        />
       </div>
 
-      {/* 결과 영역 */}
+      {/* 결과 */}
       <div className="bg-white p-4 rounded-lg border shadow-sm space-y-3">
-
-        <h2 className="text-lg font-bold mb-2 text-blue-700">유류비 계산</h2>
+        <h2 className="text-lg font-bold mb-2 text-blue-700">
+          자동차 유지비 계산 결과
+        </h2>
 
         <p>
-          월 연료 소모량: <strong>{monthlyFuelUsed.toFixed(1)} L</strong>
-        </p>
-        <p>
-          월 유류비:
-          <strong className="ml-1">{format(Math.round(monthlyFuelCost))} 원</strong>
+          월 연료비:{" "}
+          <strong className="text-green-700">
+            {format(monthlyFuelCost)} 원
+          </strong>
         </p>
 
-        <h2 className="text-lg font-bold mt-4 mb-2 text-green-700">총 유지비</h2>
         <p>
-          연간 자동차 유지비:{" "}
-          <strong>{format(Math.round(totalYearly))} 원</strong>
+          연간 연료비:{" "}
+          <strong>{format(yearlyFuelCost)} 원</strong>
         </p>
-        <p className="text-lg font-bold text-red-600">
-          월평균 유지비: {format(Math.round(totalMonthly))} 원
+
+        <p>
+          총 연간 유지비:{" "}
+          <strong className="text-red-600 text-lg">
+            {format(totalYearCost)} 원
+          </strong>
         </p>
       </div>
 
       <p className="text-[12px] text-gray-500 mt-4 leading-relaxed">
-        ※ 실제 비용은 차량 종류, 보험 등급, 주행 습관, 정비 주기에 따라 달라질 수 있습니다.
+        ※ 이 계산은 평균값 기준이며, 실제 유지비는 차량 상태·운전습관에 따라 달라질 수 있습니다.
       </p>
     </div>
   );
