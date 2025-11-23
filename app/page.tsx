@@ -294,14 +294,16 @@ export default function Home() {
   </p>
 </a>
 
-{/* 에어컨 설치·청소 견적 계산기 */}
+{/* 에어컨 설치비 견적 계산기 */}
 <a
   href="/calculators/aircon-estimate"
   className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
 >
-  <h2 className="text-lg font-bold text-blue-600">에어컨 설치·청소 견적 계산기 →</h2>
+  <h2 className="text-lg font-bold text-blue-600">
+    에어컨 설치비 견적 계산기 →
+  </h2>
   <p className="text-gray-600 text-sm">
-    벽걸이·스탠드·천장형 등 종류별 설치비, 청소비, 배관 비용 포함 견적 계산.
+    벽걸이·스탠드·2in1 에어컨 설치비와 옵션 비용을 자동으로 계산합니다.
   </p>
 </a>
 
