@@ -281,6 +281,22 @@ export default function Home() {
   </p>
 </a>
 
+import Link from "next/link";
+
+export default function PropertyBuyCostCalculatorCard() {
+  return (
+    <Link
+      href="/calculators/property-buy-cost"
+      className="block rounded-xl border p-4 hover:shadow-md transition"
+    >
+      <h2 className="text-lg font-semibold">부동산 총구매비용 계산기</h2>
+      <p className="mt-1 text-sm text-gray-600">
+        취득세, 중개수수료, 법무사비, 등기비용 등을 모두 더해 실제 부동산 구매 시 필요한 총 금액을 계산합니다.
+      </p>
+    </Link>
+  );
+}
+
         </div>
 
         {/* ===================== */}
