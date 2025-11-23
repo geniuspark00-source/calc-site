@@ -7,12 +7,10 @@ import ResultBox from "@/components/ResultBox";
 export default function AirconEstimateCalculatorUI() {
   const [type, setType] = useState("벽걸이");
 
-  // 추가 옵션
-  const [angle, setAngle] = useState(false);       // 앵글 설치
-  const [hole, setHole] = useState(0);             // 타공 개수
-  const [vacuum, setVacuum] = useState(false);     // 진공작업
+  const [angle, setAngle] = useState(false);
+  const [hole, setHole] = useState(0);
+  const [vacuum, setVacuum] = useState(false);
 
-  // 기본 설치비
   const baseInstallPrice: Record<string, number> = {
     벽걸이: 180000,
     스탠드: 210000,
@@ -21,7 +19,6 @@ export default function AirconEstimateCalculatorUI() {
 
   const installPrice = baseInstallPrice[type];
 
-  // 추가 옵션 비용
   const angleCost = angle ? 120000 : 0;
   const holeCost = hole * 30000;
   const vacuumCost = vacuum ? 50000 : 0;
@@ -39,14 +36,19 @@ export default function AirconEstimateCalculatorUI() {
         에어컨 설치비 견적 계산기
       </h1>
 
-      <p className="text-gray-600 mb-6">
+      <p className="text-gray-600">
         에어컨 종류와 추가 작업 옵션을 선택하면 예상 설치비를 자동으로 계산합니다.
       </p>
+
+      {/* ⭐️ 추가 안내 문구 */}
+      <div className="text-sm text-gray-500 space-y-1 mb-6">
+        <p>• 기본 설치비에는 배관 5M, 타공 1개가 포함됩니다.</p>
+        <p>• 이전 설치 시 이전비용은 이동 거리 등에 따라 별도 계산됩니다.</p>
+      </div>
 
       {/* 입력 영역 */}
       <div className="space-y-3 bg-white p-4 rounded-lg border shadow-sm">
 
-        {/* 종류 선택 */}
         <label className="block text-sm font-medium">에어컨 종류</label>
         <select
           className="w-full border rounded p-2"
@@ -58,7 +60,6 @@ export default function AirconEstimateCalculatorUI() {
           <option value="2in1">2 in 1</option>
         </select>
 
-        {/* 앵글 설치 */}
         <label className="block text-sm font-medium mt-2">앵글 설치</label>
         <select
           className="w-full border rounded p-2"
@@ -69,14 +70,12 @@ export default function AirconEstimateCalculatorUI() {
           <option value="yes">포함 (+120,000원)</option>
         </select>
 
-        {/* 타공 추가 */}
         <Input
           label="타공 추가 (개당 30,000원)"
           value={hole}
           onChange={setHole}
         />
 
-        {/* 진공 작업 */}
         <label className="block text-sm font-medium mt-2">진공 작업</label>
         <select
           className="w-full border rounded p-2"
@@ -89,31 +88,15 @@ export default function AirconEstimateCalculatorUI() {
 
       </div>
 
-      {/* 결과 */}
       <ResultBox
         title="에어컨 설치비 견적 결과"
         results={[
           { label: "에어컨 종류", value: type },
-          {
-            label: "기본 설치비",
-            value: `${installPrice.toLocaleString()} 원`,
-          },
-          {
-            label: "앵글 설치",
-            value: `${angleCost.toLocaleString()} 원`,
-          },
-          {
-            label: "타공 추가",
-            value: `${holeCost.toLocaleString()} 원`,
-          },
-          {
-            label: "진공 작업",
-            value: `${vacuumCost.toLocaleString()} 원`,
-          },
-          {
-            label: "총 예상 비용",
-            value: `${total.toLocaleString()} 원`,
-          },
+          { label: "기본 설치비", value: `${installPrice.toLocaleString()} 원` },
+          { label: "앵글 설치", value: `${angleCost.toLocaleString()} 원` },
+          { label: "타공 추가", value: `${holeCost.toLocaleString()} 원` },
+          { label: "진공 작업", value: `${vacuumCost.toLocaleString()} 원` },
+          { label: "총 예상 비용", value: `${total.toLocaleString()} 원` },
         ]}
       />
     </div>
