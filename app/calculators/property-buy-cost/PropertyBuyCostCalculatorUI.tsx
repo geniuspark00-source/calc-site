@@ -10,7 +10,7 @@ export default function PropertyBuyCostCalculatorUI() {
   const [lawyer, setLawyer] = useState(300000); // 법무사비 기본값
   const [etc, setEtc] = useState(200000); // 기타 등기비용
   
-  // 취득세율 (단순화)
+  // 취득세율
   const getTaxRate = () => {
     if (price < 600000000) return 0.01;
     if (price < 900000000) return 0.02;
@@ -35,7 +35,7 @@ export default function PropertyBuyCostCalculatorUI() {
   return (
     <div className="space-y-6">
       <section className="space-y-2">
-        <h1 className="text-2xl font-semibold">부동산 구매 총비용 계산기</h1>
+        <h1 className="text-2xl font-semibold">부동산 총구매비용 계산기</h1>
         <p className="text-sm text-gray-600">
           취득세, 중개수수료, 법무사비, 등기비용까지 모두 계산해 부동산 구입 시 필요한 총 금액을 안내합니다.
         </p>
