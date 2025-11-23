@@ -40,7 +40,6 @@ export default function AirconEstimateCalculatorUI() {
         에어컨 종류와 추가 작업 옵션을 선택하면 예상 설치비를 자동으로 계산합니다.
       </p>
 
-      {/* ⭐️ 추가 안내 문구 */}
       <div className="text-sm text-gray-500 space-y-1 mb-6">
         <p>• 기본 설치비에는 배관 5M, 타공 1개가 포함됩니다.</p>
         <p>• 이전 설치 시 이전비용은 이동 거리 등에 따라 별도 계산됩니다.</p>
@@ -85,9 +84,9 @@ export default function AirconEstimateCalculatorUI() {
           <option value="no">미포함</option>
           <option value="yes">포함 (+50,000원)</option>
         </select>
-
       </div>
 
+      {/* 계산 결과 */}
       <ResultBox
         title="에어컨 설치비 견적 결과"
         results={[
@@ -99,6 +98,23 @@ export default function AirconEstimateCalculatorUI() {
           { label: "총 예상 비용", value: `${total.toLocaleString()} 원` },
         ]}
       />
+
+      {/* ⭐️ 설치 신청 안내 영역 */}
+      <div className="bg-white p-4 border rounded-lg shadow-sm space-y-3">
+        <p className="text-gray-700 font-medium">
+          이 견적으로 설치하고 싶으신가요?
+        </p>
+
+        <a
+          href="https://map.naver.com/p/search/%EA%B8%B0%ED%9D%A5%EC%97%90%EC%96%B4%EC%BB%A8%EC%84%A4%EC%B9%98/place/2060152253?placePath=/home?entry=pll&from=map&fromNxList=true&fromPanelNum=2&timestamp=202511231059&locale=ko&svcName=map_pcv5&searchText=%EA%B8%B0%ED%9D%A5%EC%97%90%EC%96%B4%EC%BB%A8%EC%84%A4%EC%B9%98&searchType=place&c=15.00,0,0,0,dh"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block text-center bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition"
+        >
+          네이버 플레이스로 이동하기
+        </a>
+      </div>
+
     </div>
   );
 }
