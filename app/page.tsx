@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { generateSEOTags } from "@/lib/seo";
-import { event } from "@/lib/gtag";
+import { gtagEvent } from "@/lib/gtag";
 
 export const metadata = generateSEOTags({
   title: "실생활 계산기 모음 | Calc Site",
@@ -42,13 +42,13 @@ const calculators = [
 export default function Home() {
   // 🔥 클릭 이벤트 핸들러
   const handleClick = (href: string, title: string) => {
-    const id = href.replace("/calculators/", ""); // slug → id 변환
+    const calculatorId = href.replace("/calculators/", "");
 
-    event({
+    gtagEvent({
       action: "calculator_click",
       category: "calculator",
       label: title,
-      calculator_id: id,
+      calculator_id: calculatorId,
     });
   };
 
