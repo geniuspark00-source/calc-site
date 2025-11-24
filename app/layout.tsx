@@ -62,10 +62,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8697754621674017"
           crossOrigin="anonymous"
         ></script>
+
+        {/* 🔥🔥 Google Analytics GA4 — Measurement ID 적용 */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-69VTBW89SF"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-69VTBW89SF', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
       </head>
 
       <body className="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
-
         {/* 헤더 */}
         <header className="w-full bg-blue-600 text-white shadow-md">
           <div className="w-full max-w-5xl mx-auto px-4 py-4 text-lg font-bold">
@@ -73,16 +90,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
-        {/* 메인 콘텐츠 - 폭 제한 제거!! */}
-        <main className="flex-1 w-full px-4 py-6">
-          {children}
-        </main>
+        {/* 메인 콘텐츠 */}
+        <main className="flex-1 w-full px-4 py-6">{children}</main>
 
         {/* 푸터 */}
         <footer className="w-full bg-white border-t py-6 text-center text-sm text-gray-500">
           © 2025 계산기 포털. All rights reserved.
         </footer>
-
       </body>
     </html>
   );
