@@ -1,10 +1,14 @@
-import "../../../globals.css";
+import "../globals.css";
 import Script from "next/script";
 
-export default function CalculatorsLayout({ children }: { children: React.ReactNode }) {
+export default function CalculatorsLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <>
-      {/* 기본 GA4 스크립트 (변경 없음) */}
+      {/* 기본 GA4 스크립트 */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-SP8Y2KDTGQ"
         strategy="afterInteractive"
@@ -18,7 +22,7 @@ export default function CalculatorsLayout({ children }: { children: React.ReactN
         `}
       </Script>
 
-      {/* 전체 계산기 페이지 공통 UI 컨테이너 */}
+      {/* 계산기 공통 컨테이너 */}
       <div
         className="
           w-full 
