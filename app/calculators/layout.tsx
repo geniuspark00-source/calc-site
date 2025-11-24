@@ -1,4 +1,4 @@
-import "../../globals.css";
+import "../../../globals.css";
 import Script from "next/script";
 
 export default function CalculatorsLayout({ children }: { children: React.ReactNode }) {
