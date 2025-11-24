@@ -1,18 +1,25 @@
 #!/usr/bin/env node
 
-// Node.js 파일 자동 생성 스크립트
-// 사용법:  node scripts/create-calculator.js rent-yield
-
 const fs = require("fs");
 const path = require("path");
 
+// CLI args
 const slug = process.argv[2];
 
 if (!slug) {
-  console.error("❌ 슬러그를 입력해주세요. 예: node create-calculator.js rent-yield");
+  console.error("❌ 슬러그를 입력해주세요. 예: node scripts/create-calculator.js rent-yield");
   process.exit(1);
 }
 
+// PascalCase 변환 함수
+function toComponentName(slug) {
+  return slug
+    .split("-")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("");
+}
+
+const ComponentName = toComponentName(slug);
 const targetDir = path.join("app", "calculators", slug);
 
 // 폴더 생성
@@ -21,7 +28,7 @@ if (!fs.existsSync(targetDir)) {
   console.log(`📁 폴더 생성: ${targetDir}`);
 }
 
-// 파일 템플릿
+// page.tsx 템플릿
 const pageTemplate = `import { generateCalculatorSEOTags } from "@/lib/seo";
 import CalculatorUI from "./${slug}CalculatorUI";
 
@@ -32,16 +39,41 @@ export default function Page() {
 }
 `;
 
+// UI 자동 생성 템플릿 (2단계)
 const uiTemplate = `"use client";
 
 import Input from "@/components/Input";
 import ResultBox from "@/components/ResultBox";
 import { useState } from "react";
 
-export default function ${slug.replace(/-/g, "")}CalculatorUI() {
+export default function ${ComponentName}CalculatorUI() {
+  const [amount, setAmount] = useState(0);
+  const [period, setPeriod] = useState(0);
+  const [rate, setRate] = useState(0);
+
   return (
     <div className="space-y-6">
-      {/* 여기서 Input + 계산 로직 작성 */}
+      <Input 
+        label="금액(원)" 
+        value={amount} 
+        onChange={setAmount} 
+        placeholder="예: 1,000,000"
+      />
+
+      <Input 
+        label="기간(개월)" 
+        value={period} 
+        onChange={setPeriod} 
+        placeholder="예: 12"
+      />
+
+      <Input 
+        label="이율(%)" 
+        value={rate} 
+        onChange={setRate} 
+        placeholder="예: 5"
+      />
+
       <ResultBox title="계산 결과">
         {/* 결과 출력 */}
       </ResultBox>
@@ -50,15 +82,16 @@ export default function ${slug.replace(/-/g, "")}CalculatorUI() {
 }
 `;
 
+// Card 템플릿
 const cardTemplate = `import Link from "next/link";
 
-export default function ${slug.replace(/-/g, "")}Card() {
+export default function ${ComponentName}Card() {
   return (
     <Link
       href="/calculators/${slug}"
       className="block rounded-lg shadow-sm hover:shadow-md p-4 bg-white"
     >
-      <p className="font-bold text-lg mb-2">계산기: ${slug}</p>
+      <p className="font-bold text-lg mb-2">${ComponentName} 계산기</p>
       <p className="text-gray-600">클릭하여 계산기로 이동</p>
     </Link>
   );
@@ -75,4 +108,4 @@ if (!fs.existsSync(cardDir)) {
 }
 fs.writeFileSync(path.join(cardDir, `${slug}Card.tsx`), cardTemplate);
 
-console.log("✅ 계산기 3종 세트 생성 완료!");
+console.log("✅ 계산기 3종 세트 생성 완료! (Input 자동 생성 버전)");
