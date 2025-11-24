@@ -1,4 +1,7 @@
 import { generateSEOTags } from "@/lib/seo";
+import { gtagEvent } from "@/lib/gtag";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export const metadata = generateSEOTags({
   title: "실생활 계산기 모음 | Calc Site",
@@ -7,24 +10,48 @@ export const metadata = generateSEOTags({
   url: "https://calc-site-delta.vercel.app",
 });
 
-export default function CalculatorsLayout({
-  children,
-}: {
+export default function CalculatorsLayout({ children }: {
   children: React.ReactNode;
 }) {
+
+  // ⭐ 현재 경로 추출
+  const pathname = usePathname();  
+  // ex: "/calculators/rent-yield"
+
+  useEffect(() => {
+    if (!pathname) return;
+
+    // ⭐ ID 추출
+    const calculatorId = pathname.replace("/calculators/", "");
+
+    // ⭐ title 자동 변환 (보기 좋게)
+    const title = calculatorId
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+
+    // ⭐ GA4 자동 이벤트 전송
+    gtagEvent({
+      action: "calculator_view",
+      category: "calculator",
+      label: title,
+      calculator_id: calculatorId,
+    });
+
+  }, [pathname]);
+
   return (
     <div className="w-full p-4 flex justify-center">
-      {/* 🔵 왼쪽 광고 (PC 전용) */}
+      {/* 왼쪽 광고 */}
       <aside className="hidden md:flex flex-col mr-4 sticky top-4">
         <div className="w-[160px] h-[600px] bg-gray-200 border rounded-lg flex items-center justify-center text-gray-600">
           광고
         </div>
       </aside>
 
-      {/* 🔹 계산기 본문 */}
+      {/* 계산기 본문 */}
       <section className="w-full max-w-2xl">{children}</section>
 
-      {/* 🔵 오른쪽 광고 (PC 전용) */}
+      {/* 오른쪽 광고 */}
       <aside className="hidden md:flex flex-col ml-4 sticky top-4">
         <div className="w-[160px] h-[600px] bg-gray-200 border rounded-lg flex items-center justify-center text-gray-600">
           광고
