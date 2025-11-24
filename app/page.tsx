@@ -4,12 +4,6 @@ import Link from "next/link";
 import { generateSEOTags } from "@/lib/seo";
 import { gtagEvent } from "@/lib/gtag";
 
-export const metadata = generateSEOTags({
-  title: "실생활 계산기 모음 | Calc Site",
-  description:
-    "전세 → 월세 전환 계산기, 임대 수익률 계산기 등 다양한 생활 계산기를 제공합니다.",
-  url: "https://calc-site-delta.vercel.app",
-});
 
 // 🔥 계산기 카드 정보를 배열로 정리 (id 자동 추출)
 const calculators = [
