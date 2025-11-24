@@ -34,7 +34,11 @@ export const metadata = {
 
 import "./globals.css";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="ko">
       <head>
@@ -63,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         ></script>
 
-        {/* 🔥🔥 Google Analytics GA4 — Measurement ID 적용 */}
+        {/* 🔥 Google Analytics GA4 */}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-69VTBW89SF"
@@ -73,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
               gtag('js', new Date());
               gtag('config', 'G-69VTBW89SF', {
                 page_path: window.location.pathname,
