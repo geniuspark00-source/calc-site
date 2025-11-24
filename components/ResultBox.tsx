@@ -24,22 +24,25 @@ const formatValue = (value: string) => {
 
 export default function ResultBox(props: Props) {
   return (
-    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 space-y-3">
+    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 space-y-3 shadow-sm transition-all">
       <p className="font-bold text-lg text-blue-700 mb-2">{props.title}</p>
 
       {"results" in props && props.results ? (
         <ul className="space-y-2">
           {props.results.map((item, i) => {
+            // ⭐ 프리미엄 Highlight Box
             if (item.highlight) {
-              // ⭐ 하이라이트 박스 스타일
               return (
                 <li
                   key={i}
                   className="
-                    bg-blue-100 border border-blue-300 
-                    rounded-lg p-3 
-                    text-blue-900 font-bold text-base 
-                    flex justify-between
+                    bg-gradient-to-r from-blue-100 to-blue-200
+                    border border-blue-300 
+                    rounded-xl p-3
+                    text-blue-900 font-extrabold text-base
+                    flex justify-between items-center
+                    shadow-md
+                    transform animate-[fadeInScale_.35s_ease-out]
                   "
                 >
                   <span>{item.label}</span>
@@ -52,7 +55,10 @@ export default function ResultBox(props: Props) {
             return (
               <li
                 key={i}
-                className="text-gray-700 flex justify-between"
+                className="
+                  text-gray-700 flex justify-between items-center
+                  transition-all
+                "
               >
                 <span>{item.label}</span>
                 <span>{formatValue(item.value)}</span>
@@ -66,3 +72,15 @@ export default function ResultBox(props: Props) {
     </div>
   );
 }
+
+/* ⭐ Tailwind 커스텀 keyframes (전역에 추가 필요 없음 — inline animation 사용) */
+
+/*
+fadeInScale 애니메이션은 다음과 같은 느낌:
+
+0%   -> opacity: 0; scale: 0.97;
+100% -> opacity: 1; scale: 1;
+
+Tailwind arbitrary animation syntax:
+animate-[fadeInScale_.35s_ease-out]
+*/
