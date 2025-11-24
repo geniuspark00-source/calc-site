@@ -21,6 +21,10 @@ export default function WeddingCostCalculatorUI() {
 
   return (
     <div className="space-y-6">
+<a href="/" className="text-blue-600 underline inline-block mb-3">
+  ← 계산기 목록으로 돌아가기
+</a>
+
       <h1 className="text-xl font-bold text-gray-900 mb-2">
         💍 결혼 비용 계산기
       </h1>
