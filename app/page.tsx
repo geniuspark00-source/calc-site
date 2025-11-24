@@ -29,7 +29,10 @@ const calculators = [
   { href: "/calculators/pet-age", title: "강아지·고양이 사람 나이 환산기 →", desc: "반려동물 실제 나이를 사람 나이로 환산합니다.", color: "text-pink-600" },
   { href: "/calculators/breakup-recovery", title: "이별 복구 가능성 계산기 →", desc: "대화 톤·연락 빈도 기반 재회 확률 계산.", color: "text-pink-600" },
   { href: "/calculators/property-buy-cost", title: "부동산 총구매비용 계산기 →", desc: "취득세·중개수수료·등기비 포함 총비용 계산.", color: "text-blue-700" },
-  { href: "/calculators/aircon-estimate", title: "에어컨 설치비 견적 계산기 →", desc: "벽걸이·스탠드·2in1 설치비 자동 계산.", color: "text-blue-600" },
+  { href: "/calculators/aircon-estimate", title: "에어컨 설치비 견적 계산기 →", desc: "벽걸이·스탠드·2in1 설치비 자동 계산.", color: "text-blue-600" }, { 
+    href: "/calculators/wedding-cost", title: "결혼 비용 계산기 →", desc: "식대·스드메·대관료·허니문 포함 총 비용 계산", 
+    color: "text-pink-700" 
+  },
 ];
 
 export default function Home() {
