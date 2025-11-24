@@ -11,30 +11,32 @@ export default function AirconEstimateCalculatorUI() {
   const [hole, setHole] = useState(0);
   const [vacuum, setVacuum] = useState(false);
 
-  const [pipeLength, setPipeLength] = useState(5); // 배관 전체 길이 입력
-  const [pump, setPump] = useState(false); // 배수 펌프 옵션 추가
+  const [pipeLength, setPipeLength] = useState(5); // 배관 전체 길이
+  const [pump, setPump] = useState(false); // 배수 펌프
 
   const resultRef = useRef<HTMLDivElement | null>(null);
 
-  // 기본 설치비
+  // ------------------------------------------------
+  // 에어컨 종류 표시 문제 해결 → 사람이 읽기 좋은 value 사용
+  // ------------------------------------------------
   const baseInstallPrice: Record<string, number> = {
     벽걸이: 180000,
     스탠드: 210000,
-    "2in1": 360000,
+    "2in1 에어컨": 360000,
   };
 
   const installPrice = baseInstallPrice[type];
 
-  // 배관 연장 비용 — 기본 5M 포함
+  // 배관 연장 비용 (기본 5m)
   const extraPipe = Math.max(0, pipeLength - 5);
-  const pipeCost = extraPipe * 15000; // 1m당 15,000원
+  const pipeCost = extraPipe * 15000;
 
   // 기존 옵션 비용
   const angleCost = angle ? 120000 : 0;
   const holeCost = hole * 30000;
   const vacuumCost = vacuum ? 50000 : 0;
 
-  // 새 옵션 비용
+  // 배수 펌프
   const pumpCost = pump ? 100000 : 0;
 
   // 총합
@@ -46,7 +48,9 @@ export default function AirconEstimateCalculatorUI() {
     pipeCost +
     pumpCost;
 
-  // 요약 문장 자동 생성
+  // ------------------------------------------------
+  // 자동 생성 요약 문장 (값 정상 출력)
+  // ------------------------------------------------
   const summaryText = `${type} 기본 설치비 + ${
     extraPipe > 0 ? `배관 ${extraPipe}m 연장 포함 + ` : ""
   }${hole > 0 ? `타공 ${hole}개 + ` : ""}${
@@ -59,7 +63,7 @@ export default function AirconEstimateCalculatorUI() {
     if (resultRef.current) {
       resultRef.current.scrollIntoView({ behavior: "smooth" });
 
-      // GA4 이벤트 (선택)
+      // GA4 이벤트
       if (typeof window !== "undefined" && (window as any).gtag) {
         (window as any).gtag("event", "aircon_estimate_calculated", {
           type,
@@ -108,7 +112,7 @@ export default function AirconEstimateCalculatorUI() {
         >
           <option value="벽걸이">벽걸이</option>
           <option value="스탠드">스탠드</option>
-          <option value="2in1">2 in 1</option>
+          <option value="2in1 에어컨">2 in 1 에어컨</option>
         </select>
 
         {/* 배관 길이 */}
