@@ -1,3 +1,5 @@
+"use client";
+
 import { generateSEOTags } from "@/lib/seo";
 import { gtagEvent } from "@/lib/gtag";
 import { usePathname } from "next/navigation";
@@ -10,26 +12,23 @@ export const metadata = generateSEOTags({
   url: "https://calc-site-delta.vercel.app",
 });
 
-export default function CalculatorsLayout({ children }: {
+export default function CalculatorsLayout({
+  children,
+}: {
   children: React.ReactNode;
 }) {
-
-  // ⭐ 현재 경로 추출
-  const pathname = usePathname();  
-  // ex: "/calculators/rent-yield"
+  // ⭐ 현재 경로
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!pathname) return;
 
-    // ⭐ ID 추출
     const calculatorId = pathname.replace("/calculators/", "");
 
-    // ⭐ title 자동 변환 (보기 좋게)
     const title = calculatorId
       .replace(/-/g, " ")
       .replace(/\b\w/g, (c) => c.toUpperCase());
 
-    // ⭐ GA4 자동 이벤트 전송
     gtagEvent({
       action: "calculator_view",
       category: "calculator",
