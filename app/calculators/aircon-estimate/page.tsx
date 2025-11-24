@@ -1,5 +1,7 @@
 import { generateSEOTags } from "@/lib/seo";
 import AirconEstimateCalculatorUI from "./AirconEstimateCalculatorUI";
+import { airconFaq } from "./faq";
+import { generateFaqJsonLd } from "@/lib/schema";
 
 export const metadata = generateSEOTags({
   title: "에어컨 설치비 견적 계산기 | Calc Site",
@@ -9,5 +11,16 @@ export const metadata = generateSEOTags({
 });
 
 export default function Page() {
-  return <AirconEstimateCalculatorUI />;
+  return (
+    <>
+      {/* FAQ 스키마 구조화 데이터 삽입 (구글 전용) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={generateFaqJsonLd(airconFaq)}
+      />
+
+      {/* 실제 UI */}
+      <AirconEstimateCalculatorUI />
+    </>
+  );
 }
