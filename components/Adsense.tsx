@@ -8,12 +8,16 @@ declare global {
   }
 }
 
-export default function Adsense({ slot }) {
+interface AdsenseProps {
+  slot: string;
+}
+
+export default function Adsense({ slot }: AdsenseProps) {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }, []);
 
