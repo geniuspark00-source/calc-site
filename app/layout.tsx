@@ -33,6 +33,7 @@ export const metadata = {
 };
 
 import "./globals.css";
+import Script from "next/script";
 
 export default function RootLayout({
   children,
@@ -49,8 +50,9 @@ export default function RootLayout({
         />
 
         {/* 🔥 네이버 애널리틱스 */}
-        <script async src="//wcs.pstatic.net/wcslog.js"></script>
-        <script
+        <Script async src="//wcs.pstatic.net/wcslog.js" />
+        <Script
+          id="naver-analytics"
           dangerouslySetInnerHTML={{
             __html: `
               if (!wcs_add) var wcs_add = {};
@@ -60,19 +62,20 @@ export default function RootLayout({
           }}
         />
 
-        {/* 🔥 구글 애드센스 */}
-        <script
+        {/* 🔥 구글 애드센스 전역 스크립트 (1단계 완료) */}
+        <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8697754621674017"
           crossOrigin="anonymous"
-        ></script>
+        />
 
         {/* 🔥 Google Analytics GA4 */}
-        <script
+        <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-69VTBW89SF"
-        ></script>
-        <script
+        />
+        <Script
+          id="google-analytics"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
