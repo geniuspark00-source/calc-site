@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { generateSEOTags } from "@/lib/seo";
 import { gtagEvent } from "@/lib/gtag";
+import Adsense from "@/components/Adsense";
 
 // 🔥 계산기 카드 정보를 배열로 정리
 const calculators = [
@@ -48,13 +49,11 @@ export default function Home() {
     });
   };
 
-  return (
+return (
     <main className="w-full p-4">
-      {/* 상단 광고 */}
+      {/* 🔥 상단 광고 */}
       <div className="w-full mb-6">
-        <div className="w-full h-[120px] bg-gray-100 border rounded-lg flex items-center justify-center text-gray-500">
-          광고 자리 (상단)
-        </div>
+        <Adsense slot="6604237680" />
       </div>
 
       <div className="max-w-6xl mx-auto">
@@ -63,11 +62,9 @@ export default function Home() {
           다양한 실생활 계산기를 제공합니다. 원하는 계산기를 아래에서 선택하세요.
         </p>
 
-        {/* 모바일 중간 광고 */}
+         {/* 🔥 모바일 중간 광고 */}
         <div className="block md:hidden mb-4">
-          <div className="w-full h-[150px] bg-gray-100 border rounded-lg flex items-center justify-center text-gray-500">
-            광고 자리 (중간)
-          </div>
+          <Adsense slot="6604237680" />
         </div>
 
         {/* 2열 그리드 */}
@@ -85,11 +82,9 @@ export default function Home() {
           ))}
         </div>
 
-        {/* 하단 광고 */}
+        {/* 🔥 하단 광고 */}
         <div className="w-full mt-8">
-          <div className="w-full h-[120px] bg-gray-100 border rounded-lg flex items-center justify-center text-gray-500">
-            광고 자리 (하단)
-          </div>
+          <Adsense slot="6604237680" />
         </div>
       </div>
     </main>
