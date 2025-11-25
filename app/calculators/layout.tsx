@@ -1,5 +1,6 @@
 import "../globals.css";
 import Script from "next/script";
+import Adsense from "@/components/Adsense";
 
 export default function CalculatorsLayout({
   children,
@@ -32,7 +33,13 @@ export default function CalculatorsLayout({
           space-y-8
         "
       >
+        {/* 🔥 상단 광고 */}
+        <Adsense slot="6604237680" />
+
         {children}
+
+        {/* 🔥 하단 광고 */}
+        <Adsense slot="6604237680" />
       </div>
     </>
   );
