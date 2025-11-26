@@ -1,9 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { generateSEOTags } from "@/lib/seo";
+import { generateHomeSEOTags } from "@/lib/seo";
 import { gtagEvent } from "@/lib/gtag";
 import Adsense from "@/components/Adsense";
+
+export const metadata = generateHomeSEOTags({
+  title: "실생활 계산기 모음 | Calc Site",
+  description: "전세·월세 · 임대수익률 · 대출 · 자동차비용 · 에어컨설치비 등 다양한 실생활 계산기를 제공합니다.",
+  url: "https://calc-site-delta.vercel.app/",
+});
 
 // 🔥 계산기 카드 정보를 배열로 정리
 const calculators = [
@@ -30,10 +36,8 @@ const calculators = [
   { href: "/calculators/pet-age", title: "강아지·고양이 사람 나이 환산기 →", desc: "반려동물 실제 나이를 사람 나이로 환산합니다.", color: "text-pink-600" },
   { href: "/calculators/breakup-recovery", title: "이별 복구 가능성 계산기 →", desc: "대화 톤·연락 빈도 기반 재회 확률 계산.", color: "text-pink-600" },
   { href: "/calculators/property-buy-cost", title: "부동산 총구매비용 계산기 →", desc: "취득세·중개수수료·등기비 포함 총비용 계산.", color: "text-blue-700" },
-  { href: "/calculators/aircon-estimate", title: "에어컨 설치비 견적 계산기 →", desc: "벽걸이·스탠드·2in1 설치비 자동 계산.", color: "text-blue-600" }, { 
-    href: "/calculators/wedding-cost", title: "결혼 비용 계산기 →", desc: "식대·스드메·대관료·허니문 포함 총 비용 계산", 
-    color: "text-pink-700" 
-  },
+  { href: "/calculators/aircon-estimate", title: "에어컨 설치비 견적 계산기 →", desc: "벽걸이·스탠드·2in1 설치비 자동 계산.", color: "text-blue-600" },
+  { href: "/calculators/wedding-cost", title: "결혼 비용 계산기 →", desc: "식대·스드메·대관료·허니문 포함 총 비용 계산", color: "text-pink-700" },
 ];
 
 export default function Home() {
@@ -49,9 +53,8 @@ export default function Home() {
     });
   };
 
-return (
+  return (
     <main className="w-full p-4">
-      {/* 🔥 상단 광고 */}
       <div className="w-full mb-6">
         <Adsense slot="6604237680" />
       </div>
@@ -62,12 +65,11 @@ return (
           다양한 실생활 계산기를 제공합니다. 원하는 계산기를 아래에서 선택하세요.
         </p>
 
-         {/* 🔥 모바일 중간 광고 */}
+        {/* 🔥 모바일 중간 광고 */}
         <div className="block md:hidden mb-4">
           <Adsense slot="6604237680" />
         </div>
 
-        {/* 2열 그리드 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {calculators.map((calc) => (
             <Link
@@ -82,7 +84,6 @@ return (
           ))}
         </div>
 
-        {/* 🔥 하단 광고 */}
         <div className="w-full mt-8">
           <Adsense slot="6604237680" />
         </div>
