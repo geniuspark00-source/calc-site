@@ -1,7 +1,7 @@
 import { generateHomeSEOTags } from "@/lib/seo";
 import { gtagEvent } from "@/lib/gtag";
 import Adsense from "@/components/Adsense";
-import CalculatorCard from "@/components/CalculatorCard";
+import CalculatorCard from "@/app/components/CalculatorCard"; // ✅ 수정된 경로
 
 export const metadata = generateHomeSEOTags({
   title: "실생활 계산기 모음 | Calc Site",
@@ -40,7 +40,6 @@ const calculators = [
 ];
 
 export default function Home() {
-  // 🔥 클릭 추적 (서버에서 실행되지 않음)
   const handleCardClick = (calc) => {
     gtagEvent({
       action: "calculator_click",
