@@ -1,11 +1,12 @@
-import Link from "next/link";
 import { generateHomeSEOTags } from "@/lib/seo";
 import { gtagEvent } from "@/lib/gtag";
 import Adsense from "@/components/Adsense";
+import CalculatorCard from "@/components/CalculatorCard";
 
 export const metadata = generateHomeSEOTags({
   title: "실생활 계산기 모음 | Calc Site",
-  description: "전세·월세 · 임대수익률 · 대출 · 자동차비용 · 에어컨설치비 등 다양한 실생활 계산기를 제공합니다.",
+  description:
+    "전세·월세 · 임대수익률 · 대출 · 자동차비용 · 에어컨설치비 등 다양한 실생활 계산기를 제공합니다.",
   url: "https://calc-site-delta.vercel.app/",
 });
 
@@ -39,15 +40,13 @@ const calculators = [
 ];
 
 export default function Home() {
-  // 🔥 클릭 이벤트 핸들러
-  const handleClick = (href: string, title: string) => {
-    const calculatorId = href.replace("/calculators/", "");
-
+  // 🔥 클릭 추적 (서버에서 실행되지 않음)
+  const handleCardClick = (calc) => {
     gtagEvent({
       action: "calculator_click",
       category: "calculator",
-      label: title,
-      calculator_id: calculatorId,
+      label: calc.title,
+      calculator_id: calc.href.replace("/calculators/", ""),
     });
   };
 
@@ -63,22 +62,17 @@ export default function Home() {
           다양한 실생활 계산기를 제공합니다. 원하는 계산기를 아래에서 선택하세요.
         </p>
 
-        {/* 🔥 모바일 중간 광고 */}
         <div className="block md:hidden mb-4">
           <Adsense slot="6604237680" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {calculators.map((calc) => (
-            <Link
+            <CalculatorCard
               key={calc.href}
-              href={calc.href}
-              onClick={() => handleClick(calc.href, calc.title)}
-              className="block p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition"
-            >
-              <h2 className={`text-lg font-bold ${calc.color}`}>{calc.title}</h2>
-              <p className="text-gray-600 text-sm">{calc.desc}</p>
-            </Link>
+              calc={calc}
+              onClick={() => handleCardClick(calc)}
+            />
           ))}
         </div>
 
