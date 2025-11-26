@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { generateHomeSEOTags } from "@/lib/seo";
 import { gtagEvent } from "@/lib/gtag";
