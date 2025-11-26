@@ -1,7 +1,14 @@
 import { generateHomeSEOTags } from "@/lib/seo";
 import { gtagEvent } from "@/lib/gtag";
 import Adsense from "@/components/Adsense";
-import CalculatorCard from "@/app/components/CalculatorCard"; // ✅ 수정된 경로
+import CalculatorCard from "@/app/components/CalculatorCard";
+
+type CalculatorItem = {
+  href: string;
+  title: string;
+  desc: string;
+  color: string;
+};
 
 export const metadata = generateHomeSEOTags({
   title: "실생활 계산기 모음 | Calc Site",
@@ -11,7 +18,7 @@ export const metadata = generateHomeSEOTags({
 });
 
 // 🔥 계산기 카드 정보를 배열로 정리
-const calculators = [
+const calculators: CalculatorItem[] = [
   { href: "/calculators/rent-yield", title: "임대 수익률 계산기 →", desc: "매입가, 보증금, 월세, 대출이자를 기준으로 자동 계산합니다.", color: "text-blue-600" },
   { href: "/calculators/lease-to-monthly", title: "전세 → 월세 전환 계산기 →", desc: "전세 유지 대비 월세 전환 시 순이익을 비교합니다.", color: "text-green-700" },
   { href: "/calculators/property-tax", title: "취득세·보유세 계산기 →", desc: "취득세 + 연 보유세를 기반으로 실제 취득원가를 계산합니다.", color: "text-purple-700" },
@@ -40,7 +47,7 @@ const calculators = [
 ];
 
 export default function Home() {
-  const handleCardClick = (calc) => {
+  const handleCardClick = (calc: CalculatorItem) => {
     gtagEvent({
       action: "calculator_click",
       category: "calculator",
