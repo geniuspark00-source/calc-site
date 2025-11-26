@@ -1,3 +1,5 @@
+"use client";
+
 import { generateHomeSEOTags } from "@/lib/seo";
 import { gtagEvent } from "@/lib/gtag";
 import Adsense from "@/components/Adsense";
