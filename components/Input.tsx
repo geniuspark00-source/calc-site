@@ -22,7 +22,7 @@ export default function Input({
   const [display, setDisplay] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // 부모 value → display formatting
+  // 부모 value 변화 → display formatting
   useEffect(() => {
     if (value === 0) {
       setDisplay("");
@@ -31,9 +31,18 @@ export default function Input({
     }
   }, [value]);
 
-  // 소수점 포함 숫자만 허용하도록 normalize 수정
+  // 천단위 콤마 formatting (소수점 유지)
+  const formatNumber = (num: number | string) => {
+    if (num === "" || num === null) return "";
+    const [intPart, decimal] = num.toString().split(".");
+    const formattedInt = Number(intPart).toLocaleString();
+
+    return decimal ? `${formattedInt}.${decimal}` : formattedInt;
+  };
+
+  // 숫자 + 소수점만 허용
   const normalizeNumber = (str: string) => {
-    // 숫자와 소수점만 허용
+    // 콤마 제거 후 숫자/소수점만 남기기
     let v = str.replace(/,/g, "").replace(/[^0-9.]/g, "");
 
     // 소수점이 2개 이상 들어오면 마지막 . 제거
@@ -46,21 +55,11 @@ export default function Input({
     return v;
   };
 
-  // 천단위 콤마 formatting (소수점 유지)
-  const formatNumber = (num: number | string) => {
-    if (num === "" || num === null) return "";
-    const [intPart, decimal] = num.toString().split(".");
-    const formattedInt = Number(intPart).toLocaleString();
-
-    return decimal ? `${formattedInt}.${decimal}` : formattedInt;
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = normalizeNumber(e.target.value);
 
     setDisplay(formatNumber(raw));
 
-    // 빈값 → 0
     if (raw === "") {
       onChange(0);
     } else {
@@ -80,8 +79,10 @@ export default function Input({
 
   return (
     <div className="space-y-1">
+      {/* label */}
       <label className="text-sm font-bold text-gray-900">{label}</label>
 
+      {/* description */}
       {description && (
         <p className="text-xs text-gray-500 -mt-1">{description}</p>
       )}
@@ -103,6 +104,7 @@ export default function Input({
         onWheel={blockWheel}
       />
 
+      {/* error message */}
       {error && <p className="text-xs text-red-500">{error}</p>}
     </div>
   );
