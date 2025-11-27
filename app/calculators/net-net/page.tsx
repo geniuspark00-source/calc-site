@@ -1,4 +1,4 @@
-import { generateSEOTags } from "@/lib/seo";
+import { generateHomeSEOTags as generateSEOTags } from "@/lib/seo";
 import NetNetCalculatorUI from "./netNetCalculatorUI";
 
 export const metadata = generateSEOTags({
