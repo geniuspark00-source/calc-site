@@ -5,7 +5,7 @@ import Input from "@/components/Input";
 import ResultBox from "@/components/ResultBox";
 
 export default function FundamentalCalculatorUI() {
-  // number 기반 유지 (Input.tsx 규칙)
+  // number 기반 유지
   const [eps, setEps] = useState(0);
   const [per, setPer] = useState(10);
   const [bps, setBps] = useState(0);
@@ -35,68 +35,22 @@ export default function FundamentalCalculatorUI() {
 
       {/* 안내문구 */}
       <div className="p-4 bg-yellow-50 text-sm text-gray-700 rounded leading-relaxed">
-        ※ PBR·ROE·EPS 등의 지표는 
+        ※ PBR·ROE·EPS 등의 값은 
         <strong> 네이버증권 또는 전자공시(DART) </strong>에서 확인한 값을 입력하세요.<br/>
-        ※ 본 계산기는 <strong>현재 재무제표 기준</strong>의 가치를 기반으로 하며, 
-        <strong>미래 성장성·업황 변화·신사업 효과는 반영되지 않습니다.</strong>
+        ※ 본 계산기는 <strong>현재 재무제표 기준의 가치</strong>만 반영하며, 
+        <strong>미래 성장성·업황 변화·신사업 효과는 반영되지 않습니다.</strong><br/>
+        ※ 소수점 입력이 가능합니다. (예: 6.57, 1.23 등)
       </div>
 
       {/* 입력 */}
       <div className="grid grid-cols-1 gap-4">
-        <Input
-          label="EPS (주당순이익)"
-          value={eps}
-          onChange={setEps}
-          type="number"
-          step="0.01"
-          placeholder="예: 1234.56"
-        />
-        <Input
-          label="목표 PER"
-          value={per}
-          onChange={setPer}
-          type="number"
-          step="0.01"
-          placeholder="예: 12.5"
-        />
-        <Input
-          label="BPS (주당순자산)"
-          value={bps}
-          onChange={setBps}
-          type="number"
-          step="0.01"
-          placeholder="예: 15000"
-        />
-        <Input
-          label="목표 PBR"
-          value={pbr}
-          onChange={setPbr}
-          type="number"
-          step="0.01"
-          placeholder="예: 1.2"
-        />
-        <Input
-          label="ROE (%)"
-          value={roe}
-          onChange={setRoe}
-          type="number"
-          step="0.01"
-          placeholder="예: 8.5"
-        />
-        <Input
-          label="발행주식수"
-          value={shares}
-          onChange={setShares}
-          type="number"
-          step="1"
-        />
-        <Input
-          label="현재 주가"
-          value={currentPrice}
-          onChange={setCurrentPrice}
-          type="number"
-          step="0.01"
-        />
+        <Input label="EPS (주당순이익)" value={eps} onChange={setEps} />
+        <Input label="목표 PER" value={per} onChange={setPer} />
+        <Input label="BPS (주당순자산)" value={bps} onChange={setBps} />
+        <Input label="목표 PBR" value={pbr} onChange={setPbr} />
+        <Input label="ROE (%)" value={roe} onChange={setRoe} />
+        <Input label="발행주식수" value={shares} onChange={setShares} />
+        <Input label="현재 주가" value={currentPrice} onChange={setCurrentPrice} />
       </div>
 
       {/* 결과 */}
