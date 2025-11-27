@@ -45,8 +45,8 @@ const calculators: CalculatorItem[] = [
   { href: "/calculators/wedding-cost", title: "결혼 비용 계산기 →", desc: "식대·스드메·대관료·허니문 포함 총 비용 계산", color: "text-pink-700" },
 { 
   href: "/calculators/fundamental", 
-  title: "재무 펀더멘탈 계산기 →", 
-  desc: "EPS·PER·BPS·PBR·ROE 기반 적정주가와 시총을 분석합니다.", 
+  title: "주식 적정주가 계산기 →", 
+  desc: "EPS·PER·BPS·PBR·ROE 기반 펀더멘탈을 통해 적정주가를 계산합니다.", 
   color: "text-blue-700" 
 },
 ];
