@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Input from "@/components/Input";
 import ResultBox from "@/components/ResultBox";
+import Input from "@/components/Input";
+console.log("🔥 INPUT PATH:", require.resolve("@/components/Input"));
 
 export default function FundamentalCalculatorUI() {
   // number 기반 유지
