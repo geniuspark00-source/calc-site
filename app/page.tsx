@@ -55,7 +55,7 @@ const calculators: CalculatorItem[] = [
   desc: "유동자산·총부채·주식수 기반 Net-Net 절대 안전마진 계산",
   color: "text-blue-700"
 },
-
+];
 
 export default function Home() {
   return (
