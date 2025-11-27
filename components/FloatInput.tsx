@@ -21,27 +21,40 @@ export default function FloatInput({
 }: FloatInputProps) {
   const [display, setDisplay] = useState("");
 
+  // ★ number → 문자열 변환 시 콤마/소수점 그대로 살림
   useEffect(() => {
-    if (value === 0) setDisplay("");
-    else setDisplay(String(value));
+    if (value === 0) {
+      setDisplay("");
+    } else {
+      setDisplay(formatNumber(value));
+    }
   }, [value]);
 
+  // ★ 콤마 + 소수점 표시 함수
+  const formatNumber = (num: number | string) => {
+    if (num === "" || num === null || num === undefined) return "";
+    const parts = String(num).split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value;
+    let raw = e.target.value;
 
-    // ✔ 숫자 또는 . 만 허용
-    const cleaned = raw.replace(/[^0-9.]/g, "");
+    // ★ 숫자 + . 만 허용
+    raw = raw.replace(/[^0-9.]/g, "");
 
-    // ✔ 소수점은 1개만 허용
-    const normalized = cleaned.replace(/(\..*)\./g, "$1");
+    // ★ 소수점 1개만 허용
+    const dotCount = (raw.match(/\./g) || []).length;
+    if (dotCount > 1) return;
 
-    setDisplay(normalized);
+    // UI 표시: 콤마 붙여서 setDisplay
+    setDisplay(formatNumber(raw));
 
-    if (normalized === "" || normalized === ".") {
-      onChange(0);
-    } else {
-      onChange(Number(normalized));
-    }
+    // 숫자 파싱
+    const numeric = Number(raw.replace(/,/g, ""));
+    if (isNaN(numeric)) onChange(0);
+    else onChange(numeric);
   };
 
   return (
