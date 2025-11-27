@@ -49,7 +49,13 @@ const calculators: CalculatorItem[] = [
   desc: "EPS·PER·BPS·PBR·ROE 기반 펀더멘탈을 통해 적정주가를 계산합니다.", 
   color: "text-blue-700" 
 },
-];
+{
+  href: "/calculators/net-net",
+  title: "벤저민 그레이엄의 안전마진 계산기 →",
+  desc: "유동자산·총부채·주식수 기반 Net-Net 절대 안전마진 계산",
+  color: "text-blue-700"
+},
+
 
 export default function Home() {
   return (
