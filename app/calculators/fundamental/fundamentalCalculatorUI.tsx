@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import FloatInput from "@/components/FloatInput";
 import ResultBox from "@/components/ResultBox";
 
@@ -32,6 +33,14 @@ export default function FundamentalCalculatorUI() {
 
   return (
     <div className="space-y-6">
+
+      {/* 🔵 목록으로 돌아가기 (버튼스타일) */}
+      <Link
+        href="/"
+        className="px-3 py-2 bg-gray-100 rounded-lg text-sm text-gray-700 border inline-block"
+      >
+        ← 계산기 목록
+      </Link>
 
       {/* 안내문구 */}
       <div className="p-4 bg-yellow-50 text-sm text-gray-700 rounded leading-relaxed">
