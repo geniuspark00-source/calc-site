@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Input from "@/components/Input";
+import FloatInput from "@/components/FloatInput";
 import ResultBox from "@/components/ResultBox";
 
 export default function FundamentalCalculatorUI() {
@@ -44,13 +44,13 @@ export default function FundamentalCalculatorUI() {
 
       {/* 입력 */}
       <div className="grid grid-cols-1 gap-4">
-        <Input label="EPS (주당순이익)" value={eps} onChange={setEps} />
-        <Input label="목표 PER" value={per} onChange={setPer} />
-        <Input label="BPS (주당순자산)" value={bps} onChange={setBps} />
-        <Input label="목표 PBR" value={pbr} onChange={setPbr} />
-        <Input label="ROE (%)" value={roe} onChange={setRoe} />
-        <Input label="발행주식수" value={shares} onChange={setShares} />
-        <Input label="현재 주가" value={currentPrice} onChange={setCurrentPrice} />
+        <FloatInput label="EPS (주당순이익)" value={eps} onChange={setEps} />
+        <FloatInput label="목표 PER" value={per} onChange={setPer} />
+        <FloatInput label="BPS (주당순자산)" value={bps} onChange={setBps} />
+        <FloatInput label="목표 PBR" value={pbr} onChange={setPbr} />
+        <FloatInput label="ROE (%)" value={roe} onChange={setRoe} />
+        <FloatInput label="발행주식수" value={shares} onChange={setShares} />
+        <FloatInput label="현재 주가" value={currentPrice} onChange={setCurrentPrice} />
       </div>
 
       {/* 결과 */}
